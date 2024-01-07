@@ -28,7 +28,10 @@ async getManga(page){
 
     const data = await response.json();
     console.log(data);  // This should log the resolved data
-    this.mangaList = data[0].data;
+    this.mangaList = {
+      data: data[0].data,
+      info: data[0].info
+    };
     console.log(this.mangaList);
   } catch (error) {
     console.error('Error fetching data:', error);

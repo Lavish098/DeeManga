@@ -18,7 +18,6 @@ setup(){
 },
  created(){
     this.store.getManga(this.page)
-    // console.log(this.store.carsList);
   },
  
 
