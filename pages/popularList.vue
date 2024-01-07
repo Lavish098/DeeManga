@@ -1,10 +1,10 @@
 <template>
 <div>
   <div class="flex flex-wrap justify-center">
-    <mangaListCard :manga="manga" v-for="manga in mangaList" :key="manga.id" />
-
-    <div class="flex justify-center">
-      <div v-if="mangaList" class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+    <popularCard :popular="popular" v-for="popular in popularList" :key="popular.id" />
+  </div>
+  <div class="flex justify-center">
+  <div v-if="popularList" class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
     <div class="flex flex-1 justify-between sm:hidden">
       <a href="#" class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Previous</a>
       <a href="#" class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Next</a>
@@ -27,8 +27,7 @@
     </div>
     </div>
   </div>
-    </div>
-  </div>
+</div>
 </template>
 
 <script>
@@ -42,9 +41,32 @@ export default {
     const pages = ref([])
     const perPage = ref(10)
 
-    const mangaList = computed(() => {
-      return store.manga.data
+    const popularList = computed(() => {
+  if (!store.manga || !store.manga.data || !Array.isArray(store.manga.data)) {
+    // Handle the case when manga or manga.data is not defined or not an array
+    return [];
+  }
+  const filteredList = store.manga.data
+    .filter(item => {
+     const views = item.views.toLowerCase();
+      return views.includes('m') && parseFloat(views) > 1;
     })
+    .sort((a, b) => {
+      // Sort in descending order based on views
+      const viewsA = parseFloat(a.views);
+      const viewsB = parseFloat(b.views);
+
+      if (!isNaN(viewsA) && !isNaN(viewsB)) {
+        return viewsB - viewsA;
+      }
+
+      return 0;
+    });
+
+console.log(filteredList);
+  return filteredList;
+});
+
     const mangaPage = computed(() => {
         return store.manga.info
     })    
@@ -81,7 +103,7 @@ watch(perPage, setPages);
     });
   });
 
-    return { store, mangaList, page, pages, mangaPage, nextPage, previousPage, setPages }
+    return { store, popularList, page, pages, mangaPage, nextPage, previousPage, setPages }
   },
   async created(){
       await this.store.getManga(this.page)
