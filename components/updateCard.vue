@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-wrap justify-center">
     <div
-      v-for="(item, index) in mangaRecommendList.slice(0, 12)"
+      v-for="(item, index) in mangaRecommendList"
       :key="index"
       class="w-[304px] h-[388px] m-2 relative bg-white rounded-[10px]"
     >
@@ -34,7 +34,8 @@ export default {
     
     return { store, mangaRecommendList }
   },
-  async created() {},
+  async created(){
+  },
 }
 </script>
 

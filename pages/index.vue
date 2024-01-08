@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <h1 class="font-medium text-2xl">Popular</h1>
+      <h1 class="font-medium text-2xl" >Popular</h1>
     <div class="flex justify-center flex-wrap">
     <popularCard :popular="popular" v-for="popular in popularList.slice(0, 6)" :key="popular.id" />
     </div>
@@ -9,7 +9,7 @@
 
     <div>
       <h1 class="font-medium text-2xl">Updates</h1>
-    <updateCard/>
+    <updateCard />
     </div>
   </div>
 </template>
@@ -22,6 +22,7 @@ export default {
 setup(){
   const store = mangaStore()
  const page = ref([1])
+//  const id = ref('')
 
  const popularList = computed(() => {
   if (!store.manga || !store.manga.data || !Array.isArray(store.manga.data)) {
@@ -49,10 +50,11 @@ console.log(filteredList);
   return filteredList;
 });
 
-  return{ store, page, popularList}
+  return{ store, page, popularList }
 },
- created(){
-    this.store.getManga(this.page)
+ async created(){
+    await this.store.getManga(this.page)
+    this.store.getMangaInfo(this.id)
   },
  
 
