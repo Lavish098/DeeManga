@@ -42,16 +42,18 @@
         </div>
     </div>
 
-    <div class="searchQuery bg-red-600"  v-if="search">
-      <h2 v-for="search in searchQuery" :key="search.id" @click="searchToggle">
-        <nuxt-link >
-          <!-- :to="{name: 'productDescription', params:{productid: search.id} }" -->
-        {{search.title}}
+    <div class="searchQuery absolute z-10 left-[200px] bg-red-600 w-1/2 top-10 mb-28 mt-2 p-4 rounded-md" v-if="search">
+      <h2 v-for="result in searchQuery" :key="result.id" @click="searchToggle">
+        <nuxt-link>
+          <!-- :to="{name: 'productDescription', params:{productid: result.id} }" -->
+          <div class="text-white cursor-pointer hover:text-gray-300">
+            {{ result.title }}
+          </div>
         </nuxt-link>
       </h2>
-    <!-- <div class="item-error" v-if="searchQuery.length === 0">
-      <p>No result found</p>
-    </div> -->
+    </div>
+    <div class="item-error" v-if="searchQuery.length === 0">
+      <p class="text-red-600">No results found</p>
     </div>
 
     <nav class="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
@@ -91,6 +93,13 @@ export default {
     const searchQuery = computed (() => {
     return store.searchDetails
 });
+onMounted(() => {
+    // Watch for changes in the 'page' value
+    watchEffect(() => {
+      // Reload data when 'page' changes
+      store.getMangaSearch(search.value);
+    });
+  });
 
     return {
       store,
