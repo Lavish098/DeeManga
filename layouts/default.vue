@@ -11,9 +11,9 @@
         <div class="inline-block">
             <div class="inline-flex items-center max-w-full">
                 <button class="flex items-center flex-grow-0 flex-shrink pl-2 relative w-60 border rounded-full px-1  py-1" type="button">
-                    <input type="text" class="block flex-grow flex-shrink overflow-hidden border-none"
+                    <input v-model="search" type="text"  class="block flex-grow flex-shrink overflow-hidden border-none"
                     placeholder="Start your search">
-                    <div class="flex items-center justify-center relative  h-8 w-8 rounded-full">
+                    <div @click="searchQuery" class="flex items-center justify-center relative  h-8 w-8 rounded-full">
                         <svg
                             viewBox="0 0 32 32"
                             xmlns="http://www.w3.org/2000/svg"
@@ -42,6 +42,18 @@
         </div>
     </div>
 
+    <div class="searchQuery bg-red-600"  v-if="search">
+      <h2 v-for="search in searchQuery" :key="search.id" @click="searchToggle">
+        <nuxt-link >
+          <!-- :to="{name: 'productDescription', params:{productid: search.id} }" -->
+        {{search.title}}
+        </nuxt-link>
+      </h2>
+    <!-- <div class="item-error" v-if="searchQuery.length === 0">
+      <p>No result found</p>
+    </div> -->
+    </div>
+
     <nav class="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
       <nuxt-link :to="{name:'index'}" :class="{ 'bg-indigo-600 text-white': isActive }"
     @click="handleClick"
@@ -63,20 +75,34 @@
 
 <script>
 import { ref } from 'vue'
+import { mangaStore } from '~/store'
+
 export default {
     setup() {
+      const store = mangaStore()
     const isActive = ref(false);
+    const search = ref('')
 
     const handleClick = () => {
       isActive.value = true;
       // Add your logic here if needed
     };
+    
+    const searchQuery = computed (() => {
+    return store.searchDetails
+});
 
     return {
+      store,
       isActive,
       handleClick,
+      searchQuery,
+      search,
     };
   },
+  async created(){
+    await this.store.getMangaSearch(this.search)
+  }
 
 }
 </script>

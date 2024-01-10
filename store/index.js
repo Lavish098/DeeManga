@@ -6,6 +6,7 @@ export const mangaStore = defineStore('manga', {
   state: () => ({
     mangaList: [],
     mangaInfo: [],
+    searchResult: []
     }),
     getters: {
       manga: state => {
@@ -15,6 +16,10 @@ export const mangaStore = defineStore('manga', {
       mangaDetails: state => {
         console.log(state.mangaInfo);
         return state.mangaInfo
+      },
+      searchDetails: state => {
+        console.log(state.searchResult);
+        return state.searchResult
       },
     
   },
@@ -57,6 +62,24 @@ console.log(response);
  }
  
 },
+async getMangaSearch(search){
+  console.log(search);
+  try {
+   const response = await fetch(`https://manga-api-topaz.vercel.app/manga_search?find=${search}`);
+   
+   if (!response.ok) {
+     throw new Error(`HTTP error! Status: ${response.status}`);
+   }
+console.log(response);
+   const data = await response.json();
+   console.log(data);  // This should log the resolved data
+   this.searchResult = data[0].data
+ } catch (error) {
+   console.error('Error fetching data:', error);
+ }
+ 
+},
+
 
     },
 

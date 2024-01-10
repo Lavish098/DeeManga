@@ -1,5 +1,6 @@
 <template>
   <div class="flex flex-wrap">
+    <nuxt-link :to="{name: 'mangaInfo', params:{mangaInfo: manga.id} }">
     <div
       class="w-[304px] h-[388px] m-2 relative bg-white rounded-[10px]"
     >
@@ -16,6 +17,7 @@
       </div>
       <img class="flex w-full h-full z-10" :src="manga.img" alt="First slide" />
     </div>
+    </nuxt-link>
   </div>
 </template>
 
