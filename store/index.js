@@ -40,7 +40,7 @@ export const mangaStore = defineStore('manga', {
  actions: {
 async getManga(page){
    try {
-    const response = await fetch(`http://localhost:8000/manga_list/?length=${page}`);
+    const response = await fetch(`https://manga-api-topaz.vercel.app/manga_list/?length=${page}`);
     
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
@@ -60,7 +60,7 @@ async getManga(page){
  },
 async getMangaPopular(page){
    try {
-    const response = await fetch(`http://localhost:8000/manga_popular/?length=${page}`);
+    const response = await fetch(`https://manga-api-topaz.vercel.app/manga_popular/?length=${page}`);
     
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
@@ -80,7 +80,7 @@ async getMangaPopular(page){
  },
 async getMangaUpdate(){
    try {
-    const response = await fetch(`http://localhost:8000/manga_update`);
+    const response = await fetch(`https://manga-api-topaz.vercel.app/manga_update`);
     
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
@@ -100,7 +100,7 @@ async getMangaUpdate(){
  async getMangaInfo(id){
   console.log(id);
   try {
-   const response = await fetch(`http://localhost:8000/manga_info/${id}`);
+   const response = await fetch(`https://manga-api-topaz.vercel.app/manga_info/${id}`);
    
    if (!response.ok) {
      throw new Error(`HTTP error! Status: ${response.status}`);
@@ -118,9 +118,9 @@ console.log(response);
 async getMangaSearch(search){
   console.log(search);
   try {
-   const response = await fetch(`http://localhost:8000/manga_search?find=${search}`);
+   const response = await fetch(`https://manga-api-topaz.vercel.app/manga_search?find=${search}`);
    
-  //  manga-api-topaz.vercel.app
+   
    if (!response.ok) {
      throw new Error(`HTTP error! Status: ${response.status}`);
    }
@@ -135,7 +135,7 @@ console.log(response);
 },
 async getMangaChapter(chapterUrl){
   try {
-   const response = await fetch(`http://localhost:8000/read_manga?chapterUrl=${chapterUrl}`, {
+   const response = await fetch(`https://manga-api-topaz.vercel.app/read_manga?chapterUrl=${chapterUrl}`, {
     
   });
    

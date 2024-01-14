@@ -44,8 +44,7 @@
 
     <div class="overflow-x-hidden max-h[410px] overflow-y-auto absolute z-10 left-[300px] bg-slate-400 w-[500px] top-16 mb-28 mt-2 p-4 rounded-md" v-if="search">
       <h2 v-for="result in searchQuery" :key="result.id" @click="searchToggle">
-        <nuxt-link>
-          <!-- :to="{name: 'productDescription', params:{productid: result.id} }" -->
+    <nuxt-link :to="{name: 'mangaInfo', params:{mangaInfo: result.id} }">
           <div class="p-4 text-white cursor-pointer hover:text-gray-300">
             {{ result.title }}
           </div>
@@ -93,6 +92,9 @@ export default {
     const searchQuery = computed (() => {
     return store.searchDetails
 });
+ const searchToggle =() => {
+      search.value = ""
+    }
 onMounted(() => {
     // Watch for changes in the 'page' value
     watchEffect(() => {
@@ -105,6 +107,7 @@ onMounted(() => {
       store,
       isActive,
       handleClick,
+      searchToggle,
       searchQuery,
       search,
     };
