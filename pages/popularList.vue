@@ -41,34 +41,12 @@ export default {
     const pages = ref([])
     const perPage = ref(10)
 
-    const popularList = computed(() => {
-  if (!store.manga || !store.manga.data || !Array.isArray(store.manga.data)) {
-    // Handle the case when manga or manga.data is not defined or not an array
-    return [];
-  }
-  const filteredList = store.manga.data
-    .filter(item => {
-     const views = item.views.toLowerCase();
-      return views.includes('m') && parseFloat(views) > 1;
+  const popularList = computed(() => {
+      return store.popularDetails.data
     })
-    .sort((a, b) => {
-      // Sort in descending order based on views
-      const viewsA = parseFloat(a.views);
-      const viewsB = parseFloat(b.views);
-
-      if (!isNaN(viewsA) && !isNaN(viewsB)) {
-        return viewsB - viewsA;
-      }
-
-      return 0;
-    });
-
-console.log(filteredList);
-  return filteredList;
-});
 
     const mangaPage = computed(() => {
-        return store.manga.info
+        return store.popularDetails.info
     })    
 
 
@@ -99,14 +77,14 @@ watch(perPage, setPages);
     // Watch for changes in the 'page' value
     watchEffect(() => {
       // Reload data when 'page' changes
-      store.getManga(page.value);
+      store.getMangaPopular(page.value);
     });
   });
 
     return { store, popularList, page, pages, mangaPage, nextPage, previousPage, setPages }
   },
   async created(){
-      await this.store.getManga(this.page)
+    await this.store.getMangaPopular(this.page)
     this.setPages()
   },
 }

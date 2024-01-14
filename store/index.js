@@ -6,11 +6,13 @@ export const mangaStore = defineStore('manga', {
   state: () => ({
     mangaList: [],
     mangaInfo: [],
-    searchResult: []
+    searchResult: [],
+    updateResult: [],
+    popularResult: [],
+    chapterResult: []
     }),
     getters: {
       manga: state => {
-        console.log(state.mangaList);
         return state.mangaList
       },
       mangaDetails: state => {
@@ -21,12 +23,24 @@ export const mangaStore = defineStore('manga', {
         console.log(state.searchResult);
         return state.searchResult
       },
+      updateDetails: state => {
+        console.log(state.updateResult);
+        return state.updateResult
+      },
+      popularDetails: state => {
+        console.log(state.popularResult);
+        return state.popularResult
+      },
+      chapterDetails: state => {
+        console.log(state.chapterResult);
+        return state.chapterResult
+      },
     
   },
  actions: {
 async getManga(page){
    try {
-    const response = await fetch(`https://manga-api-topaz.vercel.app/manga_list/?length=${page}`);
+    const response = await fetch(`http://localhost:8000/manga_list/?length=${page}`);
     
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
@@ -44,10 +58,49 @@ async getManga(page){
   }
   
  },
+async getMangaPopular(page){
+   try {
+    const response = await fetch(`http://localhost:8000/manga_popular/?length=${page}`);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log(data);  // This should log the resolved data
+    this.popularResult = {
+      data: data[0].data,
+      info: data[0].info
+    };
+    console.log(this.popularResult);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+  
+ },
+async getMangaUpdate(){
+   try {
+    const response = await fetch(`http://localhost:8000/manga_update`);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log(data);  // This should log the resolved data
+    this.updateResult = {
+      data: data[0].data,
+    };
+    console.log(this.updateResult);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+  
+ },
  async getMangaInfo(id){
   console.log(id);
   try {
-   const response = await fetch(`https://manga-api-topaz.vercel.app/manga_info/${id}`);
+   const response = await fetch(`http://localhost:8000/manga_info/${id}`);
    
    if (!response.ok) {
      throw new Error(`HTTP error! Status: ${response.status}`);
@@ -65,8 +118,9 @@ console.log(response);
 async getMangaSearch(search){
   console.log(search);
   try {
-   const response = await fetch(`https://manga-api-topaz.vercel.app/manga_search?find=${search}`);
+   const response = await fetch(`http://localhost:8000/manga_search?find=${search}`);
    
+  //  manga-api-topaz.vercel.app
    if (!response.ok) {
      throw new Error(`HTTP error! Status: ${response.status}`);
    }
@@ -74,6 +128,24 @@ console.log(response);
    const data = await response.json();
    console.log(data);  // This should log the resolved data
    this.searchResult = data[0].data
+ } catch (error) {
+   console.error('Error fetching data:', error);
+ }
+ 
+},
+async getMangaChapter(chapterUrl){
+  try {
+   const response = await fetch(`http://localhost:8000/read_manga?chapterUrl=${chapterUrl}`, {
+    
+  });
+   
+   if (!response.ok) {
+     throw new Error(`HTTP error! Status: ${response.status}`);
+   }
+console.log(response);
+   const data = await response.json();
+   console.log(data);  // This should log the resolved data
+   this.chapterResult = data
  } catch (error) {
    console.error('Error fetching data:', error);
  }

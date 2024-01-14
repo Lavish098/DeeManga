@@ -8,14 +8,14 @@
         <div class="w-full h-24 text-white text-xl font-bold font-['Plus Jakarta Sans'] leading-[30px]">
           {{ manga.title }}
         </div>
-        <div class="w-full h-5 text-slate-400 text-sm font-bold font-['Plus Jakarta Sans'] leading-[21px]">
+        <!-- <div class="w-full h-5 text-slate-400 text-sm font-bold font-['Plus Jakarta Sans'] leading-[21px]">
           {{ manga.authors }}
         </div>
         <div class="mt-6 w-full h-5 text-slate-400 text-sm font-bold font-['Plus Jakarta Sans'] leading-[21px]">
           {{ manga.synopsis }}
-        </div>
+        </div> -->
       </div>
-      <img class="flex w-full h-full z-10" :src="manga.img" alt="First slide" />
+      <img class="flex w-full h-full z-10" :src="manga.image" alt="First slide" />
     </div>
     </nuxt-link>
   </div>

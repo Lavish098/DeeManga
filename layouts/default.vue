@@ -42,11 +42,11 @@
         </div>
     </div>
 
-    <div class="searchQuery absolute z-10 left-[200px] bg-red-600 w-1/2 top-10 mb-28 mt-2 p-4 rounded-md" v-if="search">
+    <div class="overflow-x-hidden max-h[410px] overflow-y-auto absolute z-10 left-[300px] bg-slate-400 w-[500px] top-16 mb-28 mt-2 p-4 rounded-md" v-if="search">
       <h2 v-for="result in searchQuery" :key="result.id" @click="searchToggle">
         <nuxt-link>
           <!-- :to="{name: 'productDescription', params:{productid: result.id} }" -->
-          <div class="text-white cursor-pointer hover:text-gray-300">
+          <div class="p-4 text-white cursor-pointer hover:text-gray-300">
             {{ result.title }}
           </div>
         </nuxt-link>

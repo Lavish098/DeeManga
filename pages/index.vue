@@ -3,7 +3,7 @@
     <div>
       <h1 class="font-medium text-2xl" >Popular</h1>
     <div class="flex justify-center flex-wrap">
-    <popularCard :popular="popular" v-for="popular in popularList.slice(0, 6)" :key="popular.id" />
+    <popularCard :popular="popular" v-for="popular in popularList" :key="popular.id" />
     </div>
     </div>
 
@@ -22,39 +22,19 @@ export default {
 setup(){
   const store = mangaStore()
  const page = ref([1])
+ const chapterUrl = ref('https://chapmanganato.to/manga-wt999902/chapter-5')
 //  const id = ref('')
 
  const popularList = computed(() => {
-  if (!store.manga || !store.manga.data || !Array.isArray(store.manga.data)) {
-    // Handle the case when manga or manga.data is not defined or not an array
-    return [];
-  }
-  const filteredList = store.manga.data
-    .filter(item => {
-     const views = item.views.toLowerCase();
-      return views.includes('m') && parseFloat(views) > 1;
+      return (store.popularDetails.data ?? []).slice(0, 9)
     })
-    .sort((a, b) => {
-      // Sort in descending order based on views
-      const viewsA = parseFloat(a.views);
-      const viewsB = parseFloat(b.views);
 
-      if (!isNaN(viewsA) && !isNaN(viewsB)) {
-        return viewsB - viewsA;
-      }
-
-      return 0;
-    });
-
-console.log(filteredList);
-  return filteredList;
-});
-
-  return{ store, page, popularList }
+  return{ store, page, popularList, chapterUrl }
 },
  async created(){
-    await this.store.getManga(this.page)
-    this.store.getMangaInfo(this.id)
+   await this.store.getMangaPopular()
+    await this.store.getMangaUpdate()
+    // this.store.getMangaInfo(this.id)
   },
  
 

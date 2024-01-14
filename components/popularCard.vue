@@ -15,7 +15,7 @@
           {{ popular.synopsis }}
         </div>
       </div>
-      <img class="flex w-full h-full z-10" :src="popular.img" alt="First slide" />
+      <img class="flex w-full h-full z-10" :src="popular.image" alt="First slide" />
     </div>
     </nuxt-link>
   </div>

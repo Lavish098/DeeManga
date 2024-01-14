@@ -40,12 +40,15 @@
           CHAPTERS</h1>
         <div v-for="(item, index) in paginatedItems" :key="index" 
         class="flex mt-6 mx-12 border-b-2 pb-10 w-full h-5 text-slate-400 text-base font-bold font-['Plus Jakarta Sans'] leading-[21px]">
+             <nuxt-link :to="{name: 'chapterInfo', params:{chapterInfo: item.chapterLink} }">
+
          <h1 class="w-full">
           {{ item.chapterTitle }}
           </h1> 
           <h1 class="w-[10%]">
           {{ item.chapterViews }} Views
           </h1>
+             </nuxt-link>
         </div>
       <div>
         <nav class="isolate inline-flex pb-48 mt-10 -space-x-px rounded-md shadow-sm" aria-label="Pagination">
