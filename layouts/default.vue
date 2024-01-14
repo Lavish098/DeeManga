@@ -50,9 +50,9 @@
           </div>
         </nuxt-link>
       </h2>
-    </div>
     <div class="item-error" v-if="searchQuery.length === 0">
       <p class="text-red-600">No results found</p>
+    </div>
     </div>
 
     <nav class="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">

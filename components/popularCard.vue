@@ -1,5 +1,6 @@
 <template>
   <div class="flex flex-wrap">
+
     <nuxt-link :to="{name: 'mangaInfo', params:{mangaInfo: popular.id} }">
     <div
       class="w-[304px] h-[388px] m-2 relative bg-white rounded-[10px]"
@@ -15,7 +16,8 @@
           {{ popular.synopsis }}
         </div>
       </div>
-      <img class="flex w-full h-full z-10" :src="popular.image" alt="First slide" />
+        <loading v-if="isLoading" class="p-10 absolute top-30 h-full"/>
+      <img class="flex w-full h-full z-10" :src="popular.image" alt="First slide" ref="imageRef"/>
     </div>
     </nuxt-link>
   </div>
@@ -23,17 +25,28 @@
 
 <script>
 import { mangaStore } from '~/store'
-import { ref, computed } from 'vue'
+import { ref, onMounted } from 'vue'
 
 export default {
   props:['popular'],
-  setup() {
-    const store = mangaStore()
-   
-    
-    return { store }
+    setup(props) {
+      const store = mangaStore()
+    const isLoading = ref(true);
+    const imageRef = ref(null);
+
+    const imageLoaded = () => {
+      isLoading.value = false;
+    };
+
+    onMounted(() => {
+      imageRef.value.addEventListener('load', imageLoaded);
+    });
+
+    return { store, isLoading, imageRef };
   },
-  async created() {},
+  async created() {
+  
+  },
 }
 </script>
 

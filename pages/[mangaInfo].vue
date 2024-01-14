@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-wrap justify-center m-5">
+  <div v-if="mangaInfo" class="flex flex-wrap justify-center m-5" >
     <div
       class="w-[304px] h-[388px] m-2 relative bg-white rounded-[10px]"
     >
@@ -82,10 +82,8 @@ export default {
     const id = route.params.mangaInfo
 
     const mangaInfo = computed(() => {
-      console.log(store.mangaDetails);
-    const filteredList = store.mangaDetails
+    return store.mangaDetails
 
-    return filteredList;
   });
 
    const chapterPage = computed(() => {

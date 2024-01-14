@@ -15,16 +15,36 @@
           {{ manga.synopsis }}
         </div> -->
       </div>
-      <img class="flex w-full h-full z-10" :src="manga.image" alt="First slide" />
+      <div>
+        <loading v-if="isLoading" class="p-10 absolute top-30 h-full"/>
+      <img class="flex w-full h-full z-10" :src="manga.image" alt="First slide" ref="imageRef"/>
+      </div>
     </div>
     </nuxt-link>
   </div>
 </template>
 
 <script>
+import { mangaStore } from '~/store'
+import { ref, onMounted } from 'vue'
 
 export default {
   props:['manga'],
+  setup(props) {
+      const store = mangaStore()
+    const isLoading = ref(true);
+    const imageRef = ref(null);
+
+    const imageLoaded = () => {
+      isLoading.value = false;
+    };
+
+    onMounted(() => {
+      imageRef.value.addEventListener('load', imageLoaded);
+    });
+
+    return { store, isLoading, imageRef };
+  },
   async created() {},
 }
 </script>
