@@ -36,15 +36,15 @@ rounded shadow-lg font-thin focus:outline-none duration-100 ">
     <h1 @click="toggleMobileNav" class="flex justify-end mr-7 mt-8 text-[60px]  font-bold text-slate-500">></h1>
     <nav class="flex flex-col justify-center items-center mt-20">
       <nuxt-link :to="{name:'index'}" :class="{ 'bg-indigo-600 text-white': isActive }"
-    @click="handleClick"
+    @click="handleClick" 
        class="px-4 py-4 mt-2 text-[25px] font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
         Updates</nuxt-link>
-      <nuxt-link :to="{name:'popularList'}" exact class="px-4 py-4 mt-2 text-[25px] font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+      <nuxt-link @click="toggleMobileNav" :to="{name:'popularList'}" exact class="px-4 py-4 mt-2 text-[25px] font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
         <h1>Popular</h1></nuxt-link>
-      <nuxt-link :to="{name:'mangaList'}" exact class="px-4 py-4 mt-2 text-[25px] font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+      <nuxt-link @click="toggleMobileNav" :to="{name:'mangaList'}" exact class="px-4 py-4 mt-2 text-[25px] font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
         <h1>Manga List</h1></nuxt-link>
-      <a class="px-4 py-4 mt-2 text-[25px] font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">
-        About</a>
+      <nuxt-link @click="toggleMobileNav" class="px-4 py-4 mt-2 text-[25px] font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">
+        About</nuxt-link>
       
     </nav>
 </div>
@@ -67,6 +67,8 @@ export default {
 
        const handleClick = () => {
       isActive.value = true;
+              mobileNav.value = !mobileNav.value;
+
       // Add your logic here if needed
     };
     const checkScreen = () => {

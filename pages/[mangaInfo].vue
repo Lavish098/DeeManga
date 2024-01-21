@@ -1,5 +1,5 @@
 <template>
-  <div v-if="mangaInfo" class="flex flex-wrap justify-center m-5" >
+  <div v-if="mangaInfo" class="flex flex-wrap justify-center m-10" >
     <div
       class="w-[304px] h-[388px] m-2 relative bg-white rounded-[10px]"
     >
@@ -7,31 +7,22 @@
   
     </div>
       <div class="details ml-5 w-2/4 bottom-0  flex-col justify-start items-start">
-        <div class="w-full h-24 mt-6 text-slate-400 text-[35px] font-bold font-['Plus Jakarta Sans'] leading-[30px]">
+        <div class="w-full h-24 mt-[100px] text-slate-400 text-[35px] font-bold font-['Plus Jakarta Sans'] leading-[30px]">
           {{ mangaInfo.title }}
         </div>
-        <div v-for="author in mangaInfo.authors" :key="author" class="w-full h-5 text-slate-400 text-lg font-bold font-['Plus Jakarta Sans'] leading-[21px]">
-          Author(s): {{ author.authorName }}
-        </div>
-        <div class="mt-6 w-full h-5 text-slate-400 text-lg font-bold font-['Plus Jakarta Sans'] leading-[21px]">
-          Status: {{ mangaInfo.status}}
-        </div>
+        
         <div class="flex text-slate-400 text-lg mt-5 font-bold font-['Plus Jakarta Sans'] leading-[21px]">
           <h3 class="mr-3">Genre: </h3>
         <div v-for="genres in mangaInfo.genres" :key="genres" class="mr-2 h-5 ">
          {{ genres.genre }}
         </div>
         </div>
-        <div class="w-full h-5 text-slate-400 text-lg mt-6 font-bold font-['Plus Jakarta Sans'] leading-[21px]">
-          Updated: {{ mangaInfo.lastUpdated}}
-        </div>
-        <div class="mt-6 w-full h-5 text-slate-400 text-lg font-bold font-['Plus Jakarta Sans'] leading-[21px]">
-          Views: {{ mangaInfo.views}}
-        </div>
+       
+        
       </div>
 
       <div>
-        <div class="mt-6 w-full h-full text-slate-400 text-[25px] font-bold font-['Plus Jakarta Sans'] leading-[30px]">
+        <div class="m-10 w-[95%] h-full text-slate-400 text-[25px] font-bold font-['Plus Jakarta Sans'] leading-[35px]">
           Description: {{ mangaInfo.synopsis }}
         </div>
       </div>
@@ -45,9 +36,9 @@
          <h1 class="w-full">
           {{ item.chapterTitle }}
           </h1> 
-          <h1 class="w-[10%]">
+          <!-- <h1 class="w-[10%]">
           {{ item.chapterViews }} Views
-          </h1>
+          </h1> -->
              </nuxt-link>
         </div>
       <div>

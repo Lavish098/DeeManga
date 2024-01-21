@@ -36,10 +36,10 @@
         </div>
     </div>
 
-    <div class="absolute left-[350px] z-10 mt-2 w-[450px] origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" v-if="search">
+    <div class="absolute left-[180px] z-10 mt-2 w-[500px] origin-top-right " v-if="search">
       <h2 v-for="result in searchQuery.slice(0, 6)" :key="result.id" @click="searchToggle">
     <nuxt-link :to="{name: 'mangaInfo', params:{mangaInfo: result.id} }">
-          <div class="flex text-gray-700 w-full px-4 py-2 text-sm">
+          <div class="flex text-gray-700 bg-white mb-5 shadow-2xl rounded-[30px] w-full px-4 py-2 text-sm">
             <img :src="result.image" alt="" class="w-[80px] h[50px]">
             <h1 class="ml-4 text-[25px] mt-3 leading-8">
               {{ result.title }}

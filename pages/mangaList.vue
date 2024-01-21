@@ -2,7 +2,7 @@
 <div>
   <div class="flex flex-wrap justify-center">
     <mangaListCard :manga="manga" v-for="manga in mangaList" :key="manga.id" />
-
+  </div>
     <div class="flex justify-center">
       <div v-if="mangaList" class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
     <div class="flex flex-1 justify-between sm:hidden">
@@ -27,7 +27,6 @@
     </div>
     </div>
   </div>
-    </div>
   </div>
 </template>
 
