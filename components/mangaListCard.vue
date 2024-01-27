@@ -1,23 +1,35 @@
 <template>
-  <div class="flex flex-wrap">
-    <nuxt-link :to="{name: 'mangaInfo', params:{mangaInfo: manga.id} }">
+ <div class="flex flex-wrap w-full py-5 px-5 smd:w-[40%] lg:w-[30%] lg:ml-3 lg:mr-[22px] smd:mr-[70px] mb-5 ml-4">
+
+    <nuxt-link class="w-full" :to="{name: 'mangaInfo', params:{mangaInfo: manga.id} }">
     <div
-      class="w-[304px] h-[388px] m-2 relative bg-white rounded-[10px]"
+      class="w-full h-full bg-white rounded-[10px] flex"
     >
-      <div class="details bg-black bottom-0 h-full w-full absolute flex-col justify-start items-start gap-1 opacity-0 hover:opacity-85 transition-opacity">
-        <div class="w-full h-24 text-white text-xl font-bold font-['Plus Jakarta Sans'] leading-[30px]">
-          {{ manga.title }}
-        </div>
-        <!-- <div class="w-full h-5 text-slate-400 text-sm font-bold font-['Plus Jakarta Sans'] leading-[21px]">
-          {{ manga.authors }}
-        </div>
-        <div class="mt-6 w-full h-5 text-slate-400 text-sm font-bold font-['Plus Jakarta Sans'] leading-[21px]">
-          {{ manga.synopsis }}
-        </div> -->
-      </div>
-      <div>
         <loading v-if="isLoading" class="p-10 absolute top-30 h-full"/>
-      <img class="flex w-full h-full z-10" :src="manga.image" alt="First slide" ref="imageRef"/>
+      <img class="flex w-[35%] h-full smd:w-[50%] lg:w-[43%]" :src="manga.image" alt="First slide" ref="imageRef"/>
+      <div class="w-full ml-6 lg:ml-3">
+        <div class="w-full mb-3 text-blue text-[25px] font-semibold font-sans leading-[30px]">
+          {{ manga.title.substring(0, 30) + '...' }}
+        </div>
+        <div 
+        class="flex flex-wrap  w-full h-5 text-black lg:text-base text-xl font-normal font-['Plus Jakarta Sans'] leading-[21px]">
+          <h2 v-for="genres in manga.genres" :key="genres" class="mr-2">
+            {{ genres }}
+            </h2>
+            
+        </div>
+        <div class="  w-full h-5 text-black text-xl lg:text-base font-normal font-['Plus Jakarta Sans'] leading-[21px]">
+
+          <h1 class="w-[100px] lg:p-2 p-3 rounded-md text-white mt-[70px] mb-4 bg-slate-500">Chapters</h1>
+         <div v-for="chapters in manga.chapters.slice(0, 2)" :key="chapters" class="w-full flex flex-wrap">
+          <nuxt-link :to="{name: 'chapterInfo', params:{chapterInfo: chapters.link} }">
+          <h2  class="mr-2 mb-2">
+            {{ chapters.title }}
+            </h2>
+          </nuxt-link>
+        </div>
+            
+        </div>
       </div>
     </div>
     </nuxt-link>

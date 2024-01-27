@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div class="mx-4 ">
+    <div class="">
       <h1 class="w-[90%] border-b-4 font-medium text-slate-500 text-3xl ml-12 my-4 p-8" >Popular</h1>
-    <div class="flex justify-center flex-wrap">
+    <div class="flex justify-center md:justify-normal flex-wrap">
     <popularCard :popular="popular" v-for="popular in popularList" :key="popular.id" />
     </div>
     </div>
 
-    <div class="mx-4 ">
+    <div class="">
       <h1 class="w-[90%] border-b-4 font-medium text-slate-500 text-3xl ml-12 my-4 p-8">Updates</h1>
     <updateCard />
     </div>
@@ -17,8 +17,10 @@
 <script>
 import { mangaStore } from '~/store'
 import {ref, onMounted, onBeforeUnmount } from 'vue'
+import Ads from '~/components/Ads.vue'
 
 export default {
+  components: { Ads },
 setup(){
   const store = mangaStore()
  const page = ref([1])

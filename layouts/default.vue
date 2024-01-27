@@ -4,7 +4,7 @@
 rounded shadow-lg font-thin focus:outline-none duration-100 ">
   <div class="block  md:flex max-w-screen-xl px-4 mx-auto md:items-center md:flex-row md:px-6 lg:px-8">
     <div class="p-4 flex flex-row items-center justify-between">
-      <nuxt-link :to="{name:'index'}" class="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">
+      <nuxt-link :to="{name:'index'}" class="text-[25px] ml-5 font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">
         DeeManga</nuxt-link>
     </div>
     <div class="absolute top-7 right-[25px] mt-4">
@@ -20,7 +20,7 @@ rounded shadow-lg font-thin focus:outline-none duration-100 ">
 
     <nav class="flex-col flex-grow pb-4 md:pb-0 md:flex md:justify-end md:flex-row" v-if="!mobile">
       <nuxt-link :to="{name:'index'}" :class="{ 'bg-indigo-600 text-white': isActive }"
-    @click="handleClick"
+    
        class="px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
         Updates</nuxt-link>
       <nuxt-link :to="{name:'popularList'}" exact class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">

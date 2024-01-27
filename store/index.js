@@ -70,7 +70,7 @@ async getMangaPopular(page){
     console.log(data);  // This should log the resolved data
     this.popularResult = {
       data: data[0].data,
-      info: data[0].info
+      info: data[0].info,
     };
     console.log(this.popularResult);
   } catch (error) {
