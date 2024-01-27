@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-wrap w-full py-5 px-5 smd:w-[40%] lg:w-[30%] lg:ml-3 lg:mr-[22px] smd:mr-[70px] mb-5 ml-4">
+  <div class="flex flex-wrap w-full py-5 px-5 smd:w-[40%] lg:w-[30%] lg:ml-3 lg:mr-[22px] smd:mr-[70px] mb-16 smd:mb-10 ml-4">
 
     <nuxt-link class="w-full" :to="{name: 'mangaInfo', params:{mangaInfo: popular.id} }">
     <div
@@ -48,7 +48,7 @@ export default {
     const imageRef = ref(null);
 
     const imageLoaded = () => {
-      isLoading.value = true;
+      isLoading.value = false;
     };
 
     onMounted(() => {
