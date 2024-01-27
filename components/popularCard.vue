@@ -5,7 +5,7 @@
     <div
       class="w-full h-full bg-white rounded-[10px] flex"
     >
-        <loading v-if="isLoading" class="p-10 absolute top-30 h-full"/>
+        <loading v-if="isLoading" class="absolute top-30"/>
       <img class="flex w-[35%] h-[90%] smd:w-[50%]" :src="popular.image" alt="First slide" ref="imageRef"/>
       <div class="w-full ml-6 smd:ml-4">
         <div class="w-full mb-3 text-blue text-[25px] font-semibold font-sans leading-[30px]">
@@ -48,7 +48,7 @@ export default {
     const imageRef = ref(null);
 
     const imageLoaded = () => {
-      isLoading.value = false;
+      isLoading.value = true;
     };
 
     onMounted(() => {
