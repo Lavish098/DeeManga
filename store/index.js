@@ -89,7 +89,7 @@ async getMangaUpdate(){
     const data = await response.json();
     console.log(data);  // This should log the resolved data
     this.updateResult = {
-      data: data[0].data,
+      data: data[0].data.splice(0, 12),
     };
     console.log(this.updateResult);
   } catch (error) {

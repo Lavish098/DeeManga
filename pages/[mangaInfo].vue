@@ -10,8 +10,11 @@
         <div class="w-full h-24 mt-6 text-slate-400 text-[35px] font-bold font-['Plus Jakarta Sans'] leading-[30px]">
           {{ mangaInfo.title }}
         </div>
-        <div v-for="author in mangaInfo.authors" :key="author" class="w-full h-5 text-slate-400 text-lg font-bold font-['Plus Jakarta Sans'] leading-[21px]">
-          Author(s): {{ author.authorName }}
+        <div class="w-full flex h-5 text-slate-400 text-lg font-bold font-['Plus Jakarta Sans'] leading-[21px]">
+          <h3 class="mr-3">Author(s): </h3>
+        <div v-for="author in mangaInfo.authors" :key="author" class="w-full">
+        {{ author.authorName }}
+        </div>
         </div>
         <div class="mt-6 w-full h-5 text-slate-400 text-lg font-bold font-['Plus Jakarta Sans'] leading-[21px]">
           Status: {{ mangaInfo.status}}
@@ -45,8 +48,8 @@
          <h1 class="w-full">
           {{ item.chapterTitle }}
           </h1> 
-          <h1 class="w-[10%]">
-          {{ item.chapterViews }} Views
+          <h1 class="w-full">
+          {{ item.uploadedDate }}
           </h1>
              </nuxt-link>
         </div>
@@ -95,7 +98,8 @@ export default {
       const endIndex = startIndex + perPage.value;
       console.log(startIndex);
       if(chapterPage.value && chapterPage.value.length > 0) {
-      return chapterPage.value.slice(startIndex, endIndex)
+      const reversedArray = chapterPage.value.slice().reverse();
+        return reversedArray.slice(startIndex, endIndex);
    }
       
     })
