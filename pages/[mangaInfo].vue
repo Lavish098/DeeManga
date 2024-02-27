@@ -94,15 +94,15 @@ export default {
     })    
     
     const paginatedItems = computed(() => {
-      const startIndex = (page.value - 1) * perPage.value;
-      const endIndex = startIndex + perPage.value;
-      console.log(startIndex);
-      if(chapterPage.value && chapterPage.value.length > 0) {
-      const reversedArray = chapterPage.value.slice().reverse();
-        return reversedArray.slice(startIndex, endIndex);
-   }
-      
-    })
+    const startIndex = (page.value - 1) * perPage.value;
+    const endIndex = startIndex + perPage.value;
+    console.log(startIndex);
+    
+    if(chapterPage.value && chapterPage.value.length > 0) {
+        return chapterPage.value.slice(startIndex, endIndex);
+    }
+});
+
     const previousPage = () => {
         if(page.value > 1){
             page.value--;

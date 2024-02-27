@@ -18,7 +18,7 @@
             </h2>
             
         </div>
-        <div class="  w-full h-5 text-black text-xl font-normal font-['Plus Jakarta Sans'] leading-[21px]">
+        <!-- <div class="  w-full h-5 text-black text-xl font-normal font-['Plus Jakarta Sans'] leading-[21px]">
 
           <h1 class="w-[100px] p-3 rounded-md text-white mt-[70px] mb-3 bg-slate-500">Chapters</h1>
          <div v-for="chapters in popular.chapters.slice(0, 2)" :key="chapters" class="w-full flex flex-wrap">
@@ -29,7 +29,7 @@
           </nuxt-link>
         </div>
             
-        </div>
+        </div> -->
       </div>
     </div>
     </nuxt-link>

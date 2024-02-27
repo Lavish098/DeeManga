@@ -39,23 +39,24 @@ export const mangaStore = defineStore('manga', {
   },
  actions: {
 async getManga(page){
-   try {
-    const response = await fetch(`https://manga-api-topaz.vercel.app/manga_list/?length=${page}`);
+try {
+  const response = await fetch(`https://manga-api-topaz.vercel.app/manga_list/?length=${page}`);
     
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
     const data = await response.json();
-    console.log(data);  // This should log the resolved data
     this.mangaList = {
       data: data[0].data,
       info: data[0].info
     };
     console.log(this.mangaList);
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
+} catch (error) {
+	console.error(error);
+}
+    
+  
   
  },
 async getMangaPopular(page){
@@ -100,7 +101,7 @@ async getMangaUpdate(){
  async getMangaInfo(id){
   console.log(id);
   try {
-   const response = await fetch(`https://manga-api-topaz.vercel.app/manga_info/${id}`);
+   const response = await fetch(`https://manga-api-topaz.vercel.app/manga_info${id}`);
    
    if (!response.ok) {
      throw new Error(`HTTP error! Status: ${response.status}`);

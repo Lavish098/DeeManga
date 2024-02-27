@@ -13,12 +13,19 @@
         </div>
         <div 
         class="flex flex-wrap  w-full h-5 text-black lg:text-base text-xl font-normal font-['Plus Jakarta Sans'] leading-[21px]">
+          <h2 class="mr-2">
+            Views: {{ manga.views }}
+            </h2>
+            
+        </div>
+        <div 
+        class="flex flex-wrap  w-full h-5 text-black lg:text-base text-xl font-normal font-['Plus Jakarta Sans'] leading-[21px]">
           <h2 v-for="genres in manga.genres" :key="genres" class="mr-2">
             {{ genres }}
             </h2>
             
         </div>
-        <div class="  w-full h-5 text-black text-xl lg:text-base font-normal font-['Plus Jakarta Sans'] leading-[21px]">
+        <!-- <div class="  w-full h-5 text-black text-xl lg:text-base font-normal font-['Plus Jakarta Sans'] leading-[21px]">
 
           <h1 class="w-[100px] lg:p-2 p-3 rounded-md text-white mt-[70px] mb-4 bg-slate-500">Chapters</h1>
          <div v-for="chapters in manga.chapters.slice(0, 2)" :key="chapters" class="w-full flex flex-wrap">
@@ -29,7 +36,7 @@
           </nuxt-link>
         </div>
             
-        </div>
+        </div> -->
       </div>
     </div>
     </nuxt-link>
