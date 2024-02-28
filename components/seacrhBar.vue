@@ -36,7 +36,7 @@
     </div>
         </div>
 
-    <div class="absolute left-[10px] md:w-[500px] md:left-[250px] shadow-xl z-10 mt-2 bg-white w-full origin-top-right " v-if="search">
+    <div class="absolute overflow-hidden overflow-y-auto left-[10px] md:w-[500px] md:left-[250px] shadow-xl z-10 mt-2 bg-white w-full origin-top-right " v-if="search">
       <h2 v-for="result in searchQuery.slice(0, 6)" :key="result.id" @click="searchToggle">
     <nuxt-link :to="{name: 'mangaInfo', params:{mangaInfo: result.id} }">
           <div class="flex text-gray-700 w-full px-4 py-2 text-sm">
