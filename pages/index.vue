@@ -24,17 +24,16 @@ export default {
 setup(){
   const store = mangaStore()
  const page = ref([1])
- const chapterUrl = ref('https://chapmanganato.to/manga-wt999902/chapter-5')
 //  const id = ref('')
 
  const popularList = computed(() => {
       return (store.popularDetails.data ?? []).slice(0, 9)
     })
 
-  return{ store, page, popularList, chapterUrl }
+  return{ store, page, popularList }
 },
  async created(){
-   await this.store.getMangaPopular()
+   await this.store.getMangaPopular(this.page)
     await this.store.getMangaUpdate()
     // this.store.getMangaInfo(this.id)
   },

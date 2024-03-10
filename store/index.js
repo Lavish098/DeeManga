@@ -40,7 +40,7 @@ export const mangaStore = defineStore('manga', {
  actions: {
 async getManga(page){
 try {
-  const response = await fetch(`https://manga-api-topaz.vercel.app/manga_list/?length=${page}`);
+  const response = await fetch(`http://localhost:8000/manga_list/?length=${page}`);
     
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
