@@ -25,6 +25,26 @@
   >
     <img class="max-w-[300px] sm:max-w-[600px] smd:max-w-[800px] z-10" :src="image.img" alt="First slide" />
   </div>
+  <div class="flex justify-center items-center p-[10px]">
+            <button @click="previousChapter" class=" bg-slate-600 py-[10px] px-[20px] rounded-md mr-5"> 
+              <h1 class="inline text-[20px] text-white font-bold w-7 sm:hidden">
+                &lt;
+              </h1>
+              <h1 class="hidden text-[20px] text-white font-bold w-7 sm:inline">
+                Previous
+                </h1> 
+              </button>
+
+      <h2 class="text-[20px]">{{ chapterNumber }}</h2>
+
+      <button @click="nextChapter" class="bg-slate-600 py-[10px] px-[20px] rounded-md ml-5"> 
+        <h1 class="inline text-[20px] text-white font-bold w-7 sm:hidden">
+                &gt;
+              </h1>
+              <h1 class="hidden text-[20px] text-white font-bold w-7 sm:inline">
+                Next
+                </h1> </button>
+    </div>
 </div>
 </template>
 

@@ -82,7 +82,9 @@ export default {
     const page = ref(1)
     const pages = ref([])
     const perPage = ref(10)
-    const id = route.params.mangaInfo
+    const id = ref(null) 
+    
+       route.params.mangaInfo && (id.value = route.params.mangaInfo);
 
     const mangaInfo = computed(() => {
     return store.mangaDetails
@@ -127,12 +129,6 @@ const setPages = () => {
 // Watch for changes in perPage and update the number of pages accordingly
 watch(perPage, setPages);
 
-    onMounted(() => {
-    // Watch for changes in the 'page' value
-    watchEffect(() => {
-      // Reload data when 'page' changes
-    });
-  });
 
     return { store, mangaInfo, page, pages, paginatedItems, id, chapterPage, previousPage, nextPage, setPages }
   },
