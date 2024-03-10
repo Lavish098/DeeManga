@@ -33,7 +33,7 @@ rounded shadow-lg font-thin focus:outline-none duration-100 ">
 
 
 <div class="bg-white shadow-2xl w-[80%] max-w-[550px] flex flex-col fixed top-0 right-0 h-full z-30" v-show="mobileNav" >
-    <h1 @click="toggleMobileNav" class="flex justify-end mr-7 mt-8 text-[60px]  font-bold text-slate-500">></h1>
+    <h1 @click="toggleMobileNav" class="flex justify-end mr-7 mt-8 text-[60px]  font-bold text-slate-500">&gt;</h1>
     <nav class="flex flex-col justify-center items-center mt-20">
       <nuxt-link :to="{name:'index'}" :class="{ 'bg-indigo-600 text-white': isActive }"
     @click="handleClick" 
