@@ -15,9 +15,10 @@
         class="flex flex-wrap w-full mt-2 h-5 text-black text-[11px] lg:text-base font-normal font-['Plus Jakarta Sans']">
           <h2 v-for="chapter in item.chapters.slice(0, 2)" :key="chapter" 
           class="mr-2 rounded-md bg-slate-300 px-2 py-3">
+         <nuxt-link :to="{name: 'chapterInfo', params:{chapterInfo: chapter.link} }">
             {{ chapter.title }}
+         </nuxt-link>
             </h2>
-            
         </div>
         <!-- <div class="mt-6 w-full h-5 text-slate-400 text-sm font-bold font-['Plus Jakarta Sans'] leading-[21px]">
           {{ item.synopsis }}
