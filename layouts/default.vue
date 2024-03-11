@@ -3,7 +3,7 @@
 <div class=" w-full py-10 text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800
 rounded shadow-lg font-thin focus:outline-none duration-100 ">
   <div class="block  md:flex max-w-screen-xl px-4 mx-auto md:items-center md:flex-row md:px-6 lg:px-8">
-    <div class="p-4 flex flex-row items-center justify-between">
+    <div class="p-1 mb-3 flex flex-row items-center justify-between">
       <nuxt-link :to="{name:'index'}" class="text-[25px] ml-5 font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">
         DeeManga</nuxt-link>
     </div>
