@@ -1,5 +1,7 @@
 <template>
-  <div class="bg-white shadow p-28 max-w-md sm:p-[130px] w-full ">
+<div class="border border-slate-300 bg-white shadow rounded-md p-4 h-[110px] 
+w-[88%] py-3 md:w-[43%] lg:w-[29%]
+max-w-sm">
   <div class="animate-pulse flex space-x-4">
     <div class="rounded-full bg-slate-200 h-10 w-10"></div>
     <div class="flex-1 space-y-6 py-1">
