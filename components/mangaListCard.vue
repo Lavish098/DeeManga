@@ -1,26 +1,26 @@
 <template>
- <div class="flex flex-wrap w-full py-5 px-5 smd:w-[40%] lg:w-[30%] lg:ml-3 lg:mr-[22px] smd:mr-[70px] mb-5 ml-4">
+ <div class="flex flex-wrap rounded-[10px] w-full bg-slate-200 mt-5 py-3 md:w-[45%] md:ml-[25px] lg:w-[30%] lg:ml-3">
 
     <nuxt-link class="w-full" :to="{name: 'mangaInfo', params:{mangaInfo: manga.id} }">
+        <loading v-if="isLoading" class="absolute"/>
     <div
-      class="w-full h-full bg-white rounded-[10px] flex"
+      class="w-full h-[100px] p-2 flex"
     >
-        <loading v-if="isLoading" class="p-10 absolute top-30 h-full"/>
-      <img class="flex w-[35%] h-full smd:w-[50%] lg:w-[43%]" :src="manga.image" alt="First slide" ref="imageRef"/>
-      <div class="w-full ml-6 lg:ml-3">
-        <div class="w-full mb-3 text-blue text-[25px] font-semibold font-sans leading-[30px]">
+      <img class="flex w-[35%] h-[100%] smd:w-[50%]" :src="manga.image" alt="First slide" ref="imageRef"/>
+      <div class="w-full ml-2 smd:ml-4">
+        <div class="w-full mb-3 text-blue text-[17px] font-semibold font-sans leading-[21px]">
           {{ manga.title.substring(0, 30) + '...' }}
         </div>
         <div 
-        class="flex flex-wrap  w-full h-5 text-black lg:text-base text-xl font-normal font-['Plus Jakarta Sans'] leading-[21px]">
+        class="flex flex-wrap w-full  h-5 text-black text-[13px] lg:text-[13px] font-normal font-['Plus Jakarta Sans'] leading-[5px]">
           <h2 class="mr-2">
             Views: {{ manga.views }}
             </h2>
             
         </div>
         <div 
-        class="flex flex-wrap  w-full h-5 text-black lg:text-base text-xl font-normal font-['Plus Jakarta Sans'] leading-[21px]">
-          <h2 v-for="genres in manga.genres" :key="genres" class="mr-2">
+        class="flex flex-wrap w-full mb-3 h-5 text-black text-[13px] lg:text-[13px] font-normal font-['Plus Jakarta Sans'] leading-[15px]">
+          <h2 v-for="genres in manga.genres.slice(0, 4)" :key="genres" class="mr-2">
             {{ genres }}
             </h2>
             

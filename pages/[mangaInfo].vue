@@ -1,41 +1,60 @@
 <template>
-  <div class="flex flex-wrap justify-center m-5" >
+<div>
+  <div class="flex flex-wrap m-5 md:flex-nowrap md:w-full" >
     <div
-      class="w-[304px] h-[388px] m-2 relative bg-white rounded-[10px]"
+      class="w-[290px] md:w-[500px] h-[388px] relative bg-white rounded-[10px]"
     >
           <img class="flex w-full h-full z-10" :src="mangaInfo.img" alt="First slide" />
   
     </div>
-      <div class="details ml-5 w-2/4 bottom-0  flex-col justify-start items-start">
-        <div class="w-full h-24 mt-6 text-slate-400 text-[35px] font-bold font-['Plus Jakarta Sans'] leading-[30px]">
+      <div class="w-full md:ml-8">
+        <div class="w-full h-16 mt-6 text-slate-400 text-[35px] font-bold font-['Plus Jakarta Sans'] leading-[30px]">
           {{ mangaInfo.title }}
         </div>
-        <div class="w-full flex h-5 text-slate-400 text-lg font-bold font-['Plus Jakarta Sans'] leading-[21px]">
-          <h3 class="mr-3">Author(s): </h3>
-        <div v-for="author in mangaInfo.authors" :key="author" class="w-full">
+        <div class="w-full flex text-slate-400 text-lg font-bold font-['Plus Jakarta Sans'] leading-[21px]">
+          <h3 class="mr-3 rounded-md bg-slate-300 px-2 py-2">Author(s): </h3>
+        <div v-for="author in mangaInfo.authors" :key="author" class="w-full px-2 py-2">
         {{ author.authorName }}
         </div>
         </div>
-        <div class="mt-6 w-full h-5 text-slate-400 text-lg font-bold font-['Plus Jakarta Sans'] leading-[21px]">
-          Status: {{ mangaInfo.status}}
+        <div class=" flex mt-4 w-full text-slate-400 text-lg font-bold font-['Plus Jakarta Sans'] leading-[21px]">
+          <h1 class="mr-3 rounded-md bg-slate-300 px-2 py-2">
+            Status:
+            </h1>
+            <h2 class="px-2 py-2">
+              {{ mangaInfo.status}}
+              </h2>
         </div>
-        <div class="flex text-slate-400 text-lg mt-5 font-bold font-['Plus Jakarta Sans'] leading-[21px]">
-          <h3 class="mr-3">Genre: </h3>
-        <div v-for="genres in mangaInfo.genres" :key="genres" class="mr-2 h-5 ">
+        <div class="flex flex-wrap text-slate-400 text-lg mt-5 font-bold font-['Plus Jakarta Sans'] leading-[21px]">
+          <h3 class="mr-3 rounded-md bg-slate-300 px-2 py-2">Genre: </h3>
+        <div v-for="genres in mangaInfo.genres" :key="genres" class="mr-2 h-5 py-2">
          {{ genres.genre }}
         </div>
         </div>
-        <div class="w-full h-5 text-slate-400 text-lg mt-6 font-bold font-['Plus Jakarta Sans'] leading-[21px]">
-          Updated: {{ mangaInfo.lastUpdated}}
-        </div>
-        <div class="mt-6 w-full h-5 text-slate-400 text-lg font-bold font-['Plus Jakarta Sans'] leading-[21px]">
-          Views: {{ mangaInfo.views}}
+        <div class="mt-5 w-full flex  text-slate-400 text-lg font-bold font-['Plus Jakarta Sans'] leading-[21px]">
+          <h1 class="rounded-md bg-slate-300 px-2 py-2 mr-3">
+            Views: 
+            </h1>
+          <h2 class="px-2 py-2">
+            {{ mangaInfo.views}}
+            </h2>
         </div>
       </div>
 
+  </div>
+      
+      
+      
+      
       <div>
-        <div class="mt-6 w-full h-full text-slate-400 text-[25px] font-bold font-['Plus Jakarta Sans'] leading-[30px]">
-          Description: {{ mangaInfo.synopsis }}
+        <div class="mt-12 w-full h-full text-slate-400 text-[25px] font-bold font-['Plus Jakarta Sans'] leading-[30px]">
+          <h1 class="uppercase ml-3 mr-3 text-[25px] border-[1px] px-2 py-5 mb-6">
+            Description
+            </h1>
+          
+          <p class="text-[15px] mx-2">
+            {{ mangaInfo.synopsis }}
+            </p>
         </div>
       </div>
       <div class="mt-12 flex flex-wrap justify-center">
@@ -140,7 +159,5 @@ watch(perPage, setPages);
 </script>
 
 <style scoped>
-.group:hover .details {
-  display: flex;
-}
+
 </style>

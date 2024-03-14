@@ -1,11 +1,11 @@
 <template>
 <div>
-<div class="flex flex-wrap justify-center">
+<div class="flex flex-wrap justify-center m-5">
     <popularCard :popular="popular" v-for="popular in popularList" :key="popular.id" />
 </div>
  
   <div class="flex justify-center">
-  <div v-if="popularList" class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+  <div v-if="popularList" class="flex items-center justify-between  bg-white px-4 py-3 sm:px-6">
     <div class="flex flex-1 items-center justify-between">
       <div>
         <nav class="isolate inline-flex pb-48 -space-x-px rounded-md shadow-sm" aria-label="Pagination">
