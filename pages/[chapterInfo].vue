@@ -95,7 +95,7 @@ export default {
         return null;
       }
       const parts = chapterUrl.value.split("/");
-      const chapterPart = parts[parts.length - 2];
+      const chapterPart = parts[parts.length - 1];
       return chapterPart;
     });
 
