@@ -24,8 +24,7 @@
         <img
           :src="`${API_BASE_URL}/image-proxy?url=${encodeURIComponent(result.image)}`"
           :alt="result.title"
-            referrerpolicy="no-referrer"
-          class="h-20 w-14 rounded object-cover shadow-sm"
+             class="h-20 w-14 rounded object-cover shadow-sm"
         />
         <div class="min-w-0 py-1">
           <h2 class="line-clamp-2 text-sm font-black leading-5 text-stone-950">

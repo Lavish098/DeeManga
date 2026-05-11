@@ -27,8 +27,7 @@
           :src="`${API_BASE_URL}/image-proxy?url=${encodeURIComponent(item.image)}`"
           :alt="item.title"
           loading="lazy"
-          referrerpolicy="no-referrer"
-        />
+         />
         <h2
           class="absolute top-1/3 right-5 w-[372px] text-white text-[32px] font-semibold font-['Plus Jakarta Sans'] leading-[48px]"
         >

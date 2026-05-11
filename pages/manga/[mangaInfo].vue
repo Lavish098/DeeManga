@@ -7,8 +7,7 @@
         v-if="mangaInfo.img"
         :src="`${API_BASE_URL}/image-proxy?url=${encodeURIComponent(mangaInfo.img)}`"
         :alt="mangaInfo.title"
-          referrerpolicy="no-referrer"
-        class="absolute inset-0 h-full w-full object-cover opacity-20 blur-sm"
+         class="absolute inset-0 h-full w-full object-cover opacity-20 blur-sm"
       />
       <div
         class="relative grid gap-8 p-5 md:grid-cols-[260px_1fr] md:p-8 lg:p-10"
@@ -17,8 +16,7 @@
           <img
             :src="`${API_BASE_URL}/image-proxy?url=${encodeURIComponent(mangaInfo.img)}`"
             :alt="mangaInfo.title"
-              referrerpolicy="no-referrer"
-            class="aspect-[3/4] w-full rounded-md object-cover shadow-[10px_10px_0_rgba(228,93,53,0.85)]"
+                 class="aspect-[3/4] w-full rounded-md object-cover shadow-[10px_10px_0_rgba(228,93,53,0.85)]"
           />
         </div>
 
