@@ -26,9 +26,20 @@ export default defineNuxtConfig({
     imports:{
       dirs:["./store"]
     },
-   app:{
-    head:{
-      viewport: "width=device-width, initial-scale=1, maximum-scale=1"
-    }
+  app: {
+    head: {
+      title: "DeeManga",
+
+      viewport:
+        "width=device-width, initial-scale=1, maximum-scale=1",
+
+      link: [
+        {
+          rel: "icon",
+          type: "image/png",
+          href: "/favicon.png",
+        },
+      ],
+    },
   },
   })
