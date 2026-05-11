@@ -8,6 +8,7 @@
         <img
           :src="manga.image"
           :alt="manga.title"
+            referrerpolicy="no-referrer"
           class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
         />
         <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-stone-950/85 to-transparent p-3">

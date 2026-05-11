@@ -21,6 +21,7 @@
         <img
           :src="featured.image"
           :alt="featured.title"
+            referrerpolicy="no-referrer"
           class="absolute inset-0 h-full w-full object-cover opacity-85 transition duration-500 group-hover:scale-105"
         />
         <div class="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/20 to-transparent"></div>

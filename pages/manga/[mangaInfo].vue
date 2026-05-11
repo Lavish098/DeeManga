@@ -7,6 +7,7 @@
         v-if="mangaInfo.img"
         :src="mangaInfo.img"
         :alt="mangaInfo.title"
+          referrerpolicy="no-referrer"
         class="absolute inset-0 h-full w-full object-cover opacity-20 blur-sm"
       />
       <div
@@ -16,6 +17,7 @@
           <img
             :src="mangaInfo.img"
             :alt="mangaInfo.title"
+              referrerpolicy="no-referrer"
             class="aspect-[3/4] w-full rounded-md object-cover shadow-[10px_10px_0_rgba(228,93,53,0.85)]"
           />
         </div>

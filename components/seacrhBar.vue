@@ -24,6 +24,7 @@
         <img
           :src="result.image"
           :alt="result.title"
+            referrerpolicy="no-referrer"
           class="h-20 w-14 rounded object-cover shadow-sm"
         />
         <div class="min-w-0 py-1">
