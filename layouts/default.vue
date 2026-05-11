@@ -2,10 +2,8 @@
   <div class="min-h-screen">
     <header class="sticky top-0 z-40 border-b border-stone-900/10 bg-[#fff9ef]/90 backdrop-blur-xl">
       <div class="mx-auto flex max-w-7xl items-center gap-4 px-4 py-4 lg:px-8">
-        <nuxt-link :to="{ name: 'index' }" class="flex min-w-fit items-center gap-3">
-          <span class="grid h-11 w-11 place-items-center rounded-md bg-stone-950 text-xl font-black text-[#fff9ef] shadow-[5px_5px_0_rgba(228,93,53,0.8)]">
-            D
-          </span>
+        <nuxt-link :to="{ name: 'index' }" class="flex min-w-fit items-center">
+          <img src="../assets/images/appicon.png" alt="" class="w-[75px] h-[75px]" referrerpolicy="no-referrer">
           <span>
             <span class="block text-lg font-black uppercase leading-none tracking-wide text-stone-950">DeeManga</span>
             <span class="block text-xs font-semibold uppercase tracking-[0.28em] text-stone-500">Read mode</span>
