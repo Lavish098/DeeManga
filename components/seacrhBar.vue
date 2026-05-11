@@ -22,7 +22,7 @@
         @click="searchToggle"
       >
         <img
-          :src="result.image"
+          :src="`${API_BASE_URL}/image-proxy?url=${encodeURIComponent(result.image)}`"
           :alt="result.title"
             referrerpolicy="no-referrer"
           class="h-20 w-14 rounded object-cover shadow-sm"
@@ -52,6 +52,8 @@ export default {
   setup() {
     const store = mangaStore();
     const search = ref("");
+    const config = useRuntimeConfig()
+      const API_BASE_URL = config.public.apiBase   
 
     const searchQuery = computed(() => {
       return store.searchDetails || [];
@@ -73,6 +75,7 @@ export default {
       searchToggle,
       searchQuery,
       search,
+      API_BASE_URL
     };
   },
 };

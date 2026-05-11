@@ -19,7 +19,7 @@
         class="group relative min-h-[360px] overflow-hidden rounded-md bg-stone-900 shadow-2xl"
       >
         <img
-          :src="featured.image"
+          :src="`${API_BASE_URL}/image-proxy?url=${encodeURIComponent(featured.image)}`"
           :alt="featured.title"
             referrerpolicy="no-referrer"
           class="absolute inset-0 h-full w-full object-cover opacity-85 transition duration-500 group-hover:scale-105"

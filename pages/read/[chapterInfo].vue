@@ -54,8 +54,6 @@ export default {
     const currentChapter = computed(() => chapterList.value[chapterIndex.value]);
     const chapterNumber = computed(() => currentChapter.value?.chapterTitle || chapterUrl.value);
 
-    console.log(route.params.chapterInfo)
-
     const findReadableIndex = (startIndex, direction) => {
       let index = startIndex + direction;
 

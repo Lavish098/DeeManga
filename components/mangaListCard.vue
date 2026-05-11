@@ -3,15 +3,20 @@
     :to="{ name: 'manga-mangaInfo', params: { mangaInfo: manga.id } }"
     class="group block"
   >
-    <article class="overflow-hidden rounded-md border border-stone-900/10 bg-[#fffdf8] shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+    <article
+      class="overflow-hidden rounded-md border border-stone-900/10 bg-[#fffdf8] shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+    >
       <div class="relative aspect-[3/4] overflow-hidden bg-stone-200">
         <img
-          :src="manga.image"
+          :src="`${API_BASE_URL}/image-proxy?url=${encodeURIComponent(manga.image)}`"
           :alt="manga.title"
-            referrerpolicy="no-referrer"
+          loading="lazy"
+          referrerpolicy="no-referrer"
           class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
         />
-        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-stone-950/85 to-transparent p-3">
+        <div
+          class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-stone-950/85 to-transparent p-3"
+        >
           <p class="line-clamp-2 text-sm font-black leading-5 text-white">
             {{ manga.title }}
           </p>
@@ -44,5 +49,10 @@
 <script>
 export default {
   props: ["manga"],
+  setup() {
+      const config = useRuntimeConfig()
+      const API_BASE_URL = config.public.apiBase      
+    return { API_BASE_URL };
+  },
 };
 </script>

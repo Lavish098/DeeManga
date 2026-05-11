@@ -5,7 +5,7 @@
     >
       <img
         v-if="mangaInfo.img"
-        :src="mangaInfo.img"
+        :src="`${API_BASE_URL}/image-proxy?url=${encodeURIComponent(mangaInfo.img)}`"
         :alt="mangaInfo.title"
           referrerpolicy="no-referrer"
         class="absolute inset-0 h-full w-full object-cover opacity-20 blur-sm"
@@ -15,7 +15,7 @@
       >
         <div class="mx-auto w-full max-w-[260px]">
           <img
-            :src="mangaInfo.img"
+            :src="`${API_BASE_URL}/image-proxy?url=${encodeURIComponent(mangaInfo.img)}`"
             :alt="mangaInfo.title"
               referrerpolicy="no-referrer"
             class="aspect-[3/4] w-full rounded-md object-cover shadow-[10px_10px_0_rgba(228,93,53,0.85)]"
@@ -213,6 +213,8 @@ export default {
     const page = ref(1);
     const perPage = ref(16);
     const id = ref(route.params.mangaInfo);
+    const config = useRuntimeConfig()
+      const API_BASE_URL = config.public.apiBase   
 
     const mangaInfo = computed(() => store.mangaDetails || {});
     const chapterPage = computed(() => mangaInfo.value.chapters || []);
@@ -283,6 +285,7 @@ export default {
       store,
       totalPages,
       visiblePages,
+      API_BASE_URL
     };
   },
   async created() {

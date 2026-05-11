@@ -9,8 +9,8 @@
     <div class="carousel-inner relative rounded-xl overflow-hidden w-11/12 max-h-[700px]">
       <div v-for="(item, index) in popularList" :key="index" :id="`slide-${index}`" :class="`${active === index ? 'active' : 'left-full'}`" 
       class="carousel-item inset-0 relative w-full transform transition-all duration-500 ease-in-out">
-        <img class="block w-[30%] h-1/2 z-10" :src="item.image" alt="First slide"   referrerpolicy="no-referrer"
- />
+         <img class="block w-[30%] h-1/2 z-10" :src="`${API_BASE_URL}/image-proxy?url=${encodeURIComponent(item.image)}`" alt="First slide"   referrerpolicy="no-referrer"
+       />
         <h2 class="absolute top-1/3 right-5 w-[372px] text-white text-[32px] font-semibold font-['Plus Jakarta Sans'] leading-[48px]
         ">{{ item.title }}</h2>
       </div>
@@ -27,13 +27,15 @@ setup(){
   const store = mangaStore()
   const items = ref([])
 const active = ref([0])
+const config = useRuntimeConfig()
+      const API_BASE_URL = config.public.apiBase   
 
 
 const popularList = computed(() => {
       return (store.popularDetails.data ?? []).slice(0, 9)
     })
 
-  return{ store, items, active, popularList}
+  return{ store, items, active, popularList, API_BASE_URL }
 },
  async created(){
     let index = 0;
