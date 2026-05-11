@@ -1,176 +1,83 @@
 <template>
-  <div>
-    <div
-      class="w-full py-10 text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800 rounded shadow-lg font-thin focus:outline-none duration-100"
-    >
-      <div
-        class="block md:flex max-w-screen-xl px-4 mx-auto md:items-center md:flex-row md:px-6 lg:px-8"
-      >
-        <div class="p-1 mb-3 flex flex-row items-center">
-          <img
-            src="../assets/images/angry.png"
-            alt="DeeManga"
-            class="w-10 h-10"
-          />
-          <nuxt-link
-            :to="{ name: 'index' }"
-            class="text-[25px] font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline"
-          >
-            DeeManga</nuxt-link
-          >
-        </div>
-        <div class="absolute top-7 right-[25px] mt-4">
-          <div
-            @click="toggleMobileNav"
-            v-show="mobile"
-            class="menu-icon"
-            :class="{ 'btn-home': mobileNav }"
-          >
-            <div
-              class="w-[30px] h-[5px] mb-[5px] mt-[4px] border-r-[5px] bg-slate-500"
-            ></div>
-            <div
-              class="w-[30px] h-[5px] mb-[5px] mt-[4px] border-r-[5px] bg-slate-500"
-            ></div>
-            <div
-              class="w-[30px] h-[5px] mb-[5px] mt-[4px] border-r-[5px] bg-slate-500"
-            ></div>
-          </div>
+  <div class="min-h-screen">
+    <header class="sticky top-0 z-40 border-b border-stone-900/10 bg-[#fff9ef]/90 backdrop-blur-xl">
+      <div class="mx-auto flex max-w-7xl items-center gap-4 px-4 py-4 lg:px-8">
+        <nuxt-link :to="{ name: 'index' }" class="flex min-w-fit items-center gap-3">
+          <span class="grid h-11 w-11 place-items-center rounded-md bg-stone-950 text-xl font-black text-[#fff9ef] shadow-[5px_5px_0_rgba(228,93,53,0.8)]">
+            D
+          </span>
+          <span>
+            <span class="block text-lg font-black uppercase leading-none tracking-wide text-stone-950">DeeManga</span>
+            <span class="block text-xs font-semibold uppercase tracking-[0.28em] text-stone-500">Read mode</span>
+          </span>
+        </nuxt-link>
+
+        <div class="hidden flex-1 justify-center lg:flex">
+          <seacrhBar />
         </div>
 
-        <seacrhBar />
-
-        <nav
-          class="flex-col flex-grow pb-4 md:pb-0 md:flex md:justify-end md:flex-row"
-          v-if="!mobile"
-        >
+        <nav class="ml-auto hidden items-center gap-2 md:flex">
           <nuxt-link
-            :to="{ name: 'index' }"
-            :class="{ 'bg-indigo-600 text-white': isActive }"
-            class="px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+            v-for="item in links"
+            :key="item.name"
+            :to="{ name: item.route }"
+            class="rounded-md px-4 py-2 text-sm font-bold text-stone-700 transition hover:bg-stone-950 hover:text-[#fff9ef]"
           >
-            Updates</nuxt-link
-          >
-          <nuxt-link
-            :to="{ name: 'popularList' }"
-            exact
-            class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-          >
-            <h1>Popular</h1></nuxt-link
-          >
-          <nuxt-link
-            :to="{ name: 'mangaList' }"
-            exact
-            class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-          >
-            <h1>Manga List</h1></nuxt-link
-          >
-          <a
-            class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-            href="#"
-          >
-            About</a
-          >
+            {{ item.name }}
+          </nuxt-link>
         </nav>
 
-        <div
-          class="bg-white shadow-2xl w-[80%] max-w-[550px] flex flex-col fixed top-0 right-0 h-full z-30"
-          v-show="mobileNav"
+        <button
+          type="button"
+          class="ml-auto grid h-11 w-11 place-items-center rounded-md border border-stone-900/15 bg-white/70 text-2xl font-black text-stone-900 md:hidden"
+          @click="mobileNav = !mobileNav"
+          aria-label="Toggle navigation"
         >
-          <h1
-            @click="toggleMobileNav"
-            class="flex justify-end mr-7 mt-8 text-[60px] font-bold text-slate-500"
-          >
-            &gt;
-          </h1>
-          <nav class="flex flex-col justify-center items-center mt-20">
-            <nuxt-link
-              :to="{ name: 'index' }"
-              :class="{ 'bg-indigo-600 text-white': isActive }"
-              @click="handleClick"
-              class="px-4 py-4 mt-2 text-[25px] font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-            >
-              Updates</nuxt-link
-            >
-            <nuxt-link
-              @click="toggleMobileNav"
-              :to="{ name: 'popularList' }"
-              exact
-              class="px-4 py-4 mt-2 text-[25px] font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-            >
-              <h1>Popular</h1></nuxt-link
-            >
-            <nuxt-link
-              @click="toggleMobileNav"
-              :to="{ name: 'mangaList' }"
-              exact
-              class="px-4 py-4 mt-2 text-[25px] font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-            >
-              <h1>Manga List</h1></nuxt-link
-            >
-            <nuxt-link
-              @click="toggleMobileNav"
-              class="px-4 py-4 mt-2 text-[25px] font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-              href="#"
-            >
-              About</nuxt-link
-            >
-          </nav>
-        </div>
+          {{ mobileNav ? "x" : "=" }}
+        </button>
       </div>
-    </div>
-    <slot />
+
+      <div class="border-t border-stone-900/10 px-4 pb-4 lg:hidden">
+        <seacrhBar />
+      </div>
+
+      <div v-if="mobileNav" class="border-t border-stone-900/10 bg-[#fff9ef] px-4 py-4 md:hidden">
+        <nav class="grid gap-2">
+          <nuxt-link
+            v-for="item in links"
+            :key="item.name"
+            :to="{ name: item.route }"
+            class="rounded-md bg-stone-950 px-4 py-3 text-sm font-bold text-[#fff9ef]"
+            @click="mobileNav = false"
+          >
+            {{ item.name }}
+          </nuxt-link>
+        </nav>
+      </div>
+    </header>
+
+    <main class="relative mx-auto max-w-7xl px-4 py-8 lg:px-8">
+      <slot />
+    </main>
   </div>
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 
 export default {
   setup() {
-    const isActive = ref(false);
-    const mobile = ref(null);
     const mobileNav = ref(false);
-    const windowWidth = ref(null);
+    const links = [
+      { name: "Updates", route: "index" },
+      { name: "Popular", route: "popularList" },
+      { name: "Library", route: "mangaList" },
+    ];
 
-    const handleClick = () => {
-      isActive.value = true;
-      mobileNav.value = !mobileNav.value;
-
-      // Add your logic here if needed
-    };
-    const checkScreen = () => {
-      if (process.client) {
-        windowWidth.value = window.innerWidth;
-        if (windowWidth.value <= 989) {
-          mobile.value = true;
-          return;
-        }
-        mobile.value = false;
-        mobileNav.value = false;
-        return;
-      }
-    };
-    const toggleMobileNav = () => {
-      mobileNav.value = !mobileNav.value;
-    };
-    onMounted(() => {
-      if (process.client) {
-        window.addEventListener("resize", checkScreen);
-        checkScreen();
-      }
-    });
     return {
-      handleClick,
-      isActive,
-      mobile,
+      links,
       mobileNav,
-      windowWidth,
-      checkScreen,
-      toggleMobileNav,
     };
   },
 };
 </script>
-
-<style scoped></style>

@@ -1,146 +1,96 @@
 <template>
-  <div>
-    <div
-      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 gap-y-4 my-10"
-    >
+  <div class="space-y-8">
+    <section class="flex flex-col gap-3 border-b border-stone-900/10 pb-6 md:flex-row md:items-end md:justify-between">
+      <div>
+        <p class="text-xs font-black uppercase tracking-[0.28em] text-[#0f766e]">Browse</p>
+        <h1 class="mt-2 text-4xl font-black text-stone-950">Manga library</h1>
+      </div>
+      <p class="text-sm font-semibold text-stone-500">Page {{ page }}</p>
+    </section>
+
+    <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
       <mangaListCard
-        :manga="manga"
         v-for="manga in mangaList"
         :key="manga.id"
+        :manga="manga"
       />
     </div>
-    <div class="flex justify-center">
-      <div
-        v-if="mangaList"
-        class="flex items-center justify-between bg-white px-4 py-3 sm:px-6"
-      >
-        <div class="flex flex-1 items-center justify-between">
-          <div>
-            <nav
-              class="isolate inline-flex rounded-md shadow-sm"
-              aria-label="Pagination"
-            >
-              <span
-                @click="previousPage"
-                class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-              >
-                Previous</span
-              >
 
-              <!-- Current: "z-10 bg-indigo-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600", Default: "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" -->
-              <button
-                type="button"
-                v-for="pageNumber in pages.slice(
-                  Math.max(0, page - 3),
-                  page + 2
-                )"
-                :key="pageNumber"
-                @click="pagesNumber(pageNumber)"
-                aria-current="page"
-                :class="{
-                  'bg-gray-600 text-white': pageNumber === page,
-                  'text-gray-400': pageNumber !== page,
-                }"
-                class="relative z-10 border-2 inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-400 focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                {{ pageNumber }}
-              </button>
-              <span
-                @click="nextPage"
-                class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-              >
-                Next</span
-              >
-            </nav>
-          </div>
-        </div>
-      </div>
-    </div>
+    <nav v-if="mangaList?.length" class="flex items-center justify-center gap-2 pb-16">
+      <button type="button" class="rounded-md border border-stone-900/15 bg-white/70 px-4 py-2 text-sm font-bold text-stone-700" @click="previousPage">
+        Previous
+      </button>
+      <button
+        v-for="pageNumber in visiblePages"
+        :key="pageNumber"
+        type="button"
+        class="h-10 w-10 rounded-md text-sm font-black"
+        :class="pageNumber === page ? 'bg-stone-950 text-[#fff9ef]' : 'bg-white/70 text-stone-600'"
+        @click="pagesNumber(pageNumber)"
+      >
+        {{ pageNumber }}
+      </button>
+      <button type="button" class="rounded-md border border-stone-900/15 bg-white/70 px-4 py-2 text-sm font-bold text-stone-700" @click="nextPage">
+        Next
+      </button>
+    </nav>
   </div>
 </template>
 
 <script>
 import { mangaStore } from "~/store";
-import { ref, computed } from "vue";
+import { ref } from "vue";
 
 export default {
   setup() {
     const store = mangaStore();
     const page = ref(1);
-    const pages = ref([]);
-    const perPage = ref(10);
 
-    const mangaList = computed(() => {
-      return store.manga.data;
+    const mangaList = computed(() => store.manga.data || []);
+    const mangaPage = computed(() => store.manga.info || { totalPages: 1 });
+    const visiblePages = computed(() => {
+      const start = Math.max(1, page.value - 2);
+      return Array.from({ length: 5 }, (_, index) => start + index).filter(
+        (item) => item <= mangaPage.value.totalPages
+      );
     });
-    const mangaPage = computed(() => {
-      return store.manga.info;
-    });
+
+    const scrollTop = () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
 
     const previousPage = () => {
       if (page.value > 1) {
         page.value--;
       }
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
+      scrollTop();
     };
 
     const nextPage = () => {
-      if (page.value < Math.ceil(mangaPage.value.totalPages / perPage.value)) {
+      if (page.value < mangaPage.value.totalPages) {
         page.value++;
       }
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
+      scrollTop();
     };
+
     const pagesNumber = (pageNumber) => {
       page.value = pageNumber;
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-    };
-    const setPages = () => {
-      // Calculate the total number of pages based on the total number of items and items per page
-      const numberOfPages = Math.ceil(
-        mangaPage.value.totalPages / perPage.value
-      );
-      for (let index = 1; index <= numberOfPages; index++) {
-        pages.value.push(index);
-      }
+      scrollTop();
     };
 
-    // Watch for changes in perPage and update the number of pages accordingly
-    watch(perPage, setPages);
-
-    onMounted(() => {
-      // Watch for changes in the 'page' value
-      watchEffect(() => {
-        // Reload data when 'page' changes
-        store.getManga(page.value);
-      });
+    watchEffect(() => {
+      store.getManga(page.value);
     });
 
     return {
-      store,
       mangaList,
-      page,
-      pagesNumber,
-      pages,
       mangaPage,
       nextPage,
+      page,
+      pagesNumber,
       previousPage,
-      setPages,
+      visiblePages,
     };
-  },
-  async created() {
-    await this.store.getManga(this.page);
-    this.setPages();
   },
 };
 </script>
-
-<style></style>

@@ -1,41 +1,43 @@
 <template>
-  <div>
-    <div class="block w-full md:w-[170%] ml-0 mr-5 px-2 search">
-      <div class="inline-flex items-center w-full">
-        <input
-          v-model="search"
-          type="text"
-          class="py-3 px-4 w-full rounded shadow font-thin focus:outline-none focus:shadow-lg focus:shadow-slate-200 duration-100 shadow-gray-100"
-          placeholder="Start your search"
-        />
-        <div
-          @click="searchQuery"
-          class="flex items-center justify-center relative h-9 w-2 rounded-full"
-        ></div>
-      </div>
+  <div class="relative w-full max-w-2xl">
+    <div class="flex h-12 items-center mt-2 md:mt-0 rounded-md border border-stone-900/15 bg-white/80 px-4 shadow-sm">
+      <span class="mr-3 text-3xl text-stone-500">⌕</span>
+      <input
+        v-model="search"
+        type="text"
+        class="w-full bg-transparent text-sm font-semibold text-stone-900 border-0 placeholder:text-stone-400 focus:outline-none focus:ring-0"
+        placeholder="Search manga, manhwa, authors"
+      />
     </div>
 
     <div
-      class="absolute border-[1px] border-gray-500 rounded-[10px] overflow-y-auto left-[5px] md:w-[450px] md:left-[220px] shadow-xl z-10 mt-2 bg-white w-full origin-top-right"
       v-if="search"
-      style="max-height: 400px"
+      class="absolute left-0 right-0 top-14 z-50 max-h-[420px] overflow-y-auto rounded-md border border-stone-900/10 bg-[#fffdf8] p-2 shadow-2xl"
     >
-      <h2 v-for="result in searchQuery" :key="result.id" @click="searchToggle">
-        <nuxt-link
-          :to="{ name: 'mangaInfo', params: { mangaInfo: result.id } }"
-        >
-          <div
-            class="flex w-[100%] max-w-[285px] my-4 mx-4 375px:max-w-[340px] 425px:max-w-[390px] px-2 py-2 rounded-[5px] text-sm"
-          >
-            <img :src="result.image" alt="" class="w-[60px] h-[70px]" />
-            <h1 class="ml-2 text-[15px] font-normal mt-1 leading-5">
-              {{ result.title.substring(0, 40) + "..." }}
-            </h1>
-          </div>
-        </nuxt-link>
-      </h2>
-      <div class="p-3" v-if="searchQuery.length === 0">
-        <p class="text-gray-600 font-medium">No results found</p>
+      <nuxt-link
+        v-for="result in searchQuery"
+        :key="result.id"
+        :to="{ name: 'manga-mangaInfo', params: { mangaInfo: result.id } }"
+        class="flex gap-3 rounded-md p-2 transition hover:bg-stone-100"
+        @click="searchToggle"
+      >
+        <img
+          :src="result.image"
+          :alt="result.title"
+          class="h-20 w-14 rounded object-cover shadow-sm"
+        />
+        <div class="min-w-0 py-1">
+          <h2 class="line-clamp-2 text-sm font-black leading-5 text-stone-950">
+            {{ result.title }}
+          </h2>
+          <p class="mt-2 line-clamp-1 text-xs font-semibold text-stone-500">
+            {{ (result.genres || []).slice(0, 3).join(" / ") || "MangaDex" }}
+          </p>
+        </div>
+      </nuxt-link>
+
+      <div v-if="searchQuery.length === 0" class="p-5 text-center text-sm font-semibold text-stone-500">
+        No results found
       </div>
     </div>
   </div>
@@ -44,36 +46,33 @@
 <script>
 import { ref } from "vue";
 import { mangaStore } from "~/store";
+
 export default {
   setup() {
     const store = mangaStore();
     const search = ref("");
 
     const searchQuery = computed(() => {
-      return store.searchDetails;
+      return store.searchDetails || [];
     });
+
     const searchToggle = () => {
       search.value = "";
     };
-    onMounted(() => {
-      // Watch for changes in the 'page' value
-      watchEffect(() => {
-        // Reload data when 'page' changes
-        store.getMangaSearch(search.value);
-      });
-    });
+
+    watch(
+      search,
+      async (value) => {
+        await store.getMangaSearch(value);
+      },
+      { immediate: false }
+    );
 
     return {
-      store,
       searchToggle,
       searchQuery,
       search,
     };
   },
-  async created() {
-    await this.store.getMangaSearch(this.search);
-  },
 };
 </script>
-
-<style></style>
