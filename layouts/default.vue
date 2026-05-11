@@ -3,7 +3,7 @@
     <header class="sticky top-0 z-40 border-b border-stone-900/10 bg-[#fff9ef]/90 backdrop-blur-xl">
       <div class="mx-auto flex max-w-7xl items-center gap-4 px-4 py-4 lg:px-8">
         <nuxt-link :to="{ name: 'index' }" class="flex min-w-fit items-center">
-          <img src="../assets/images/appicon.png" alt="" class="w-[75px] h-[75px]" referrerpolicy="no-referrer">
+          <img :src="appicon" alt="" class="w-[75px] h-[75px]" referrerpolicy="no-referrer">
           <span>
             <span class="block text-lg font-black uppercase leading-none tracking-wide text-stone-950">DeeManga</span>
             <span class="block text-xs font-semibold uppercase tracking-[0.28em] text-stone-500">Read mode</span>
@@ -62,6 +62,8 @@
 
 <script>
 import { ref } from "vue";
+import appicon from '~/assets/images/appicon.png'
+
 
 export default {
   setup() {
@@ -75,6 +77,7 @@ export default {
     return {
       links,
       mobileNav,
+      appicon
     };
   },
 };
