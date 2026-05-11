@@ -1,14 +1,9 @@
 import { defineStore } from "pinia";
 
-const API_BASE =
-  import.meta.env.NUXT_PUBLIC_API_BASE ||
-  import.meta.env.VITE_API_BASE ||
-  "http://localhost:4322";
-
 function buildApiUrl(path) {
-  return `${API_BASE}${path}`;
+  const config = useRuntimeConfig()
+  return `${config.public.apiBase}${path}`
 }
-
 export const mangaStore = defineStore("manga", {
   state: () => ({
     mangaList: [],
