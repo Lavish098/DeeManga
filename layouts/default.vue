@@ -62,7 +62,7 @@
 
 <script>
 import { ref } from "vue";
-import appicon from '~/assets/images/appicon.png'
+import appicon from '~/assets/images/appIcon.png'
 
 
 export default {
