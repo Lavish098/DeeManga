@@ -13,6 +13,9 @@ export const mangaStore = defineStore("manga", {
     updateResult: [],
     popularResult: [],
     chapterResult: [],
+    isMangaLoading: false,
+    isPopularLoading: false,
+    isUpdateLoading: false,
   }),
   getters: {
     manga: (state) => {
@@ -36,6 +39,7 @@ export const mangaStore = defineStore("manga", {
   },
   actions: {
     async getManga(page) {
+      this.isMangaLoading = true;
       try {
         const response = await fetch(buildApiUrl(`/manga_list?length=${page}`));
 
@@ -50,9 +54,12 @@ export const mangaStore = defineStore("manga", {
         };
       } catch (error) {
         console.error(error);
+      } finally {
+        this.isMangaLoading = false;
       }
     },
     async getMangaPopular(page) {
+      this.isPopularLoading = true;
       try {
         const response = await fetch(
           buildApiUrl(`/manga_popular?length=${page}`)
@@ -69,9 +76,12 @@ export const mangaStore = defineStore("manga", {
         };
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        this.isPopularLoading = false;
       }
     },
     async getMangaUpdate() {
+      this.isUpdateLoading = true;
       try {
         const response = await fetch(buildApiUrl(`/manga_update`));
 
@@ -85,6 +95,8 @@ export const mangaStore = defineStore("manga", {
         };
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        this.isUpdateLoading = false;
       }
     },
     async getMangaInfo(id) {

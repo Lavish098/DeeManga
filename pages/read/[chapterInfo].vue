@@ -1,17 +1,17 @@
 <template>
   <div class="mx-auto max-w-5xl">
-    <div class="sticky top-[82px] z-30 mb-6 rounded-md border border-stone-900/10 bg-[#fff9ef]/95 p-3 shadow-lg backdrop-blur">
+    <div class="sticky top-[82px] z-30 mb-6 rounded-md border border-stone-900/10 bg-[#fff9ef]/95 p-3 shadow-lg backdrop-blur dark:border-white/10 dark:bg-stone-950/95">
       <div class="flex flex-wrap items-center justify-between gap-3">
-        <button type="button" class="rounded-md border border-stone-900/15 bg-white/80 px-4 py-2 text-sm font-black text-stone-800 disabled:opacity-40" :disabled="previousReadableIndex === null" @click="previousChapter">
+        <button type="button" class="rounded-md border border-stone-900/15 bg-white/80 px-4 py-2 text-sm font-black text-stone-800 disabled:opacity-40 dark:border-white/15 dark:bg-white/10 dark:text-stone-200" :disabled="previousReadableIndex === null" @click="previousChapter">
           Previous
         </button>
 
         <div class="min-w-0 flex-1 text-center">
-          <p class="truncate text-sm font-black text-stone-950">{{ chapterNumber }}</p>
-          <p class="mt-1 text-xs font-semibold text-stone-500">{{ chapterInfo.length }} pages</p>
+          <p class="truncate text-sm font-black text-stone-950 dark:text-[#fff9ef]">{{ chapterNumber }}</p>
+          <p class="mt-1 text-xs font-semibold text-stone-500 dark:text-stone-400">{{ chapterInfo.length }} pages</p>
         </div>
 
-        <button type="button" class="rounded-md bg-stone-950 px-4 py-2 text-sm font-black text-[#fff9ef] disabled:opacity-40" :disabled="nextReadableIndex === null" @click="nextChapter">
+        <button type="button" class="rounded-md bg-stone-950 px-4 py-2 text-sm font-black text-[#fff9ef] disabled:opacity-40 dark:bg-[#fff9ef] dark:text-stone-950" :disabled="nextReadableIndex === null" @click="nextChapter">
           Next
         </button>
       </div>
@@ -23,9 +23,9 @@
       </div>
     </div>
 
-    <div v-else class="rounded-md border border-stone-900/10 bg-white/80 p-8 text-center shadow-sm">
-      <h1 class="text-2xl font-black text-stone-950">This chapter opens outside DeeManga</h1>
-      <p class="mx-auto mt-3 max-w-lg text-sm font-semibold leading-6 text-stone-500">
+    <div v-else class="rounded-md border border-stone-900/10 bg-white/80 p-8 text-center shadow-sm dark:border-white/10 dark:bg-stone-950/90">
+      <h1 class="text-2xl font-black text-stone-950 dark:text-[#fff9ef]">This chapter opens outside DeeManga</h1>
+      <p class="mx-auto mt-3 max-w-lg text-sm font-semibold leading-6 text-stone-500 dark:text-stone-400">
         Some MangaDex chapters are hosted by official sources, so they do not provide page images for the in-app reader.
       </p>
       <a v-if="currentChapter?.externalUrl" :href="currentChapter.externalUrl" target="_blank" rel="noreferrer" class="mt-5 inline-flex rounded-md bg-[#e45d35] px-5 py-3 text-sm font-black text-white">

@@ -81,14 +81,14 @@
           <span
             v-for="genre in genres"
             :key="genre"
-            class="rounded bg-white/70 px-3 py-2 text-xs font-black uppercase tracking-wide text-stone-700 shadow-sm"
+            class="rounded bg-white/70 px-3 py-2 text-xs font-black uppercase tracking-wide text-stone-700 shadow-sm dark:bg-white/10 dark:text-stone-200"
             >{{ genre }}</span
           >
         </div>
       </div>
 
       <div
-        class="rounded-md border border-stone-900/10 bg-[#fffdf8]/90 p-4 shadow-sm md:p-5"
+        class="rounded-md border border-stone-900/10 bg-[#fffdf8]/90 p-4 shadow-sm dark:border-white/10 dark:bg-stone-950/90 md:p-5"
       >
         <div class="mb-4 flex items-end justify-between gap-4">
           <div>
@@ -97,11 +97,11 @@
             >
               Chapter list
             </p>
-            <h2 class="mt-2 text-2xl font-black text-stone-950">
+            <h2 class="mt-2 text-2xl font-black text-stone-950 dark:text-[#fff9ef]">
               Start reading
             </h2>
           </div>
-          <span class="text-sm font-bold text-stone-500"
+          <span class="text-sm font-bold text-stone-500 dark:text-stone-400"
             >{{ chapterPage.length }} total</span
           >
         </div>
@@ -114,13 +114,13 @@
             <NuxtLink
               v-if="item.isReadable"
               :to="chapterRoute(item, index)"
-              class="flex items-center justify-between gap-4 rounded-md border border-stone-900/10 bg-white/80 px-4 py-3 transition hover:border-stone-950/40 hover:bg-white cursor-pointer"
+              class="flex items-center justify-between gap-4 rounded-md border border-stone-900/10 bg-white/80 px-4 py-3 transition hover:border-stone-950/40 hover:bg-white cursor-pointer dark:border-white/10 dark:bg-white/10 dark:hover:border-white/30 dark:hover:bg-white/15"
             >
               <div class="min-w-0">
-                <h3 class="truncate text-sm font-black text-stone-950">
+                <h3 class="truncate text-sm font-black text-stone-950 dark:text-[#fff9ef]">
                   {{ item.chapterTitle }}
                 </h3>
-                <p class="mt-1 text-xs font-semibold text-stone-500">
+                <p class="mt-1 text-xs font-semibold text-stone-500 dark:text-stone-400">
                   {{ formatDate(item.uploadedDate) }}
                 </p>
               </div>
@@ -136,13 +136,13 @@
               :href="item.externalUrl"
               target="_blank"
               rel="noreferrer"
-              class="flex items-center justify-between gap-4 rounded-md border border-stone-900/10 bg-white/80 px-4 py-3 transition hover:border-stone-950/40 hover:bg-white cursor-pointer"
+              class="flex items-center justify-between gap-4 rounded-md border border-stone-900/10 bg-white/80 px-4 py-3 transition hover:border-stone-950/40 hover:bg-white cursor-pointer dark:border-white/10 dark:bg-white/10 dark:hover:border-white/30 dark:hover:bg-white/15"
             >
               <div class="min-w-0">
-                <h3 class="truncate text-sm font-black text-stone-950">
+                <h3 class="truncate text-sm font-black text-stone-950 dark:text-[#fff9ef]">
                   {{ item.chapterTitle }}
                 </h3>
-                <p class="mt-1 text-xs font-semibold text-stone-500">
+                <p class="mt-1 text-xs font-semibold text-stone-500 dark:text-stone-400">
                   {{ formatDate(item.uploadedDate) }}
                 </p>
               </div>
@@ -157,7 +157,7 @@
 
         <div
           v-else
-          class="rounded-md bg-stone-100 p-6 text-sm font-semibold text-stone-500"
+          class="rounded-md bg-stone-100 p-6 text-sm font-semibold text-stone-500 dark:bg-white/10 dark:text-stone-400"
         >
           No chapters are available for this title yet.
         </div>
@@ -168,7 +168,7 @@
         >
           <button
             type="button"
-            class="rounded-md border border-stone-900/15 px-4 py-2 text-sm font-bold text-stone-700"
+            class="rounded-md border border-stone-900/15 px-4 py-2 text-sm font-bold text-stone-700 dark:border-white/15 dark:text-stone-200"
             @click="previousPage"
           >
             Previous
@@ -180,8 +180,8 @@
             class="h-10 w-10 rounded-md text-sm font-black"
             :class="
               pageNumber === page
-                ? 'bg-stone-950 text-[#fff9ef]'
-                : 'bg-stone-100 text-stone-600'
+                ? 'bg-stone-950 text-[#fff9ef] dark:bg-[#fff9ef] dark:text-stone-950'
+                : 'bg-stone-100 text-stone-600 dark:bg-white/10 dark:text-stone-300'
             "
             @click="page = pageNumber"
           >
@@ -189,7 +189,7 @@
           </button>
           <button
             type="button"
-            class="rounded-md border border-stone-900/15 px-4 py-2 text-sm font-bold text-stone-700"
+            class="rounded-md border border-stone-900/15 px-4 py-2 text-sm font-bold text-stone-700 dark:border-white/15 dark:text-stone-200"
             @click="nextPage"
           >
             Next

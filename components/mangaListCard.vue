@@ -4,7 +4,7 @@
     class="group block"
   >
     <article
-      class="overflow-hidden rounded-md border border-stone-900/10 bg-[#fffdf8] shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+      class="overflow-hidden rounded-md border border-stone-900/10 bg-[#fffdf8] shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-stone-950/90"
     >
       <div class="relative aspect-[3/4] overflow-hidden bg-stone-200">
         <img
@@ -26,7 +26,7 @@
           <span
             v-for="genre in (manga.genres || []).slice(0, 2)"
             :key="genre"
-            class="rounded bg-[#e45d35]/10 px-2 py-1 text-[11px] font-black uppercase tracking-wide text-[#a33d22]"
+            class="rounded bg-[#e45d35]/10 px-2 py-1 text-[11px] font-black uppercase tracking-wide text-[#a33d22] dark:text-[#ffb199]"
           >
             {{ genre }}
           </span>
@@ -35,7 +35,7 @@
           <span
             v-for="chapter in manga.chapters.slice(0, 2)"
             :key="chapter.link"
-            class="truncate text-xs font-bold text-stone-500"
+            class="truncate text-xs font-bold text-stone-500 dark:text-stone-400"
           >
             {{ chapter.title }}
           </span>

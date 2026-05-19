@@ -2,7 +2,7 @@
   <div class="space-y-12">
     <section class="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
       <div
-        class="flex min-h-[360px] flex-col justify-end rounded-md bg-stone-950 p-6 text-[#fff9ef] shadow-2xl md:p-10"
+        class="flex min-h-[360px] flex-col justify-end rounded-md bg-stone-950 p-6 text-[#fff9ef] shadow-2xl dark:bg-black md:p-10"
       >
         <p
           class="mb-4 text-sm font-black uppercase tracking-[0.34em] text-[#e45d35]"
@@ -20,8 +20,24 @@
         </p>
       </div>
 
+      <div
+        v-if="isPopularLoading"
+        class="min-h-[360px] overflow-hidden rounded-md bg-stone-900 shadow-2xl"
+        aria-hidden="true"
+      >
+        <div class="h-full min-h-[360px] animate-pulse bg-stone-800">
+          <div
+            class="flex h-full min-h-[360px] flex-col justify-end bg-gradient-to-t from-stone-950 via-stone-900/60 to-stone-800 p-6"
+          >
+            <div class="mb-3 h-3 w-24 rounded bg-stone-700"></div>
+            <div class="h-8 w-4/5 rounded bg-stone-700"></div>
+            <div class="mt-3 h-4 w-2/3 rounded bg-stone-700"></div>
+          </div>
+        </div>
+      </div>
+
       <nuxt-link
-        v-if="featured"
+        v-else-if="featured"
         :to="{ name: 'manga-mangaInfo', params: { mangaInfo: featured.id } }"
         class="group relative min-h-[360px] overflow-hidden rounded-md bg-stone-900 shadow-2xl"
       >
@@ -57,24 +73,32 @@
           >
             Popular now
           </p>
-          <h2 class="mt-2 text-3xl font-black text-stone-950">
+          <h2 class="mt-2 text-3xl font-black text-stone-950 dark:text-[#fff9ef]">
             Reader favorites
           </h2>
         </div>
         <nuxt-link
           :to="{ name: 'popularList' }"
-          class="rounded-md bg-stone-950 px-4 py-2 text-sm font-bold text-[#fff9ef]"
+          class="rounded-md bg-stone-950 px-4 py-2 text-sm font-bold text-[#fff9ef] dark:bg-[#fff9ef] dark:text-stone-950"
         >
           View all
         </nuxt-link>
       </div>
 
       <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-        <popularCard
-          v-for="popular in popularList"
-          :key="popular.id"
-          :popular="popular"
-        />
+        <template v-if="isPopularLoading">
+          <mangaCardSkeleton
+            v-for="item in skeletonCards"
+            :key="`home-popular-skeleton-${item}`"
+          />
+        </template>
+        <template v-else>
+          <popularCard
+            v-for="popular in popularList"
+            :key="popular.id"
+            :popular="popular"
+          />
+        </template>
       </div>
     </section>
 
@@ -85,7 +109,7 @@
         >
           New chapters
         </p>
-        <h2 class="mt-2 text-3xl font-black text-stone-950">
+        <h2 class="mt-2 text-3xl font-black text-stone-950 dark:text-[#fff9ef]">
           Recently updated
         </h2>
       </div>
@@ -108,16 +132,28 @@ export default {
     const popularList = computed(() => {
       return (store.popularDetails.data || []).slice(0, 6);
     });
+    const isPopularLoading = computed(() => store.isPopularLoading);
+    const skeletonCards = Array.from({ length: 6 }, (_, index) => index + 1);
 
     const featured = computed(() => {
       return popularList.value[0];
     });
 
-    return { store, page, popularList, featured, API_BASE_URL };
+    return {
+      store,
+      page,
+      popularList,
+      featured,
+      API_BASE_URL,
+      isPopularLoading,
+      skeletonCards,
+    };
   },
   async created() {
-    await this.store.getMangaPopular(this.page);
-    await this.store.getMangaUpdate();
+    await Promise.all([
+      this.store.getMangaPopular(this.page),
+      this.store.getMangaUpdate(),
+    ]);
   },
 };
 </script>
